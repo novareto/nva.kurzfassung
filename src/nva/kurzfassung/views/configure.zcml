@@ -7,6 +7,14 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+     name="archiv-nachricht-view"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".nachrichten_archiv_ansicht.NachrichtenArchivAnsicht"
+     template="archiv_nachricht_view.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="nachricht-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_ansicht.NachrichtenAnsicht"
