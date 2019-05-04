@@ -7,6 +7,14 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+     name="enhanced-cardview"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".erweiterte_kartenansicht.ErweiterteKartenansicht"
+     template="enhanced_cardview.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="enhanced-folderlist"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_ordnerliste.ErweiterteOrdnerliste"
