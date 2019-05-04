@@ -10,7 +10,7 @@
      name="enhanced-tableview"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_tabelle.ErweiterteTabelle"
-     template="enhanced_tableview.pt"
+     template="templates/enhanced_tableview.pt"
      permission="zope2.View"
      />
 
@@ -18,7 +18,7 @@
      name="enhanced-contentdir"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweitertes_inhaltsverzeichnis.ErweitertesInhaltsverzeichnis"
-     template="enhanced_contentdir.pt"
+     template="templates/enhanced_contentdir.pt"
      permission="zope2.View"
      />
 
@@ -26,7 +26,7 @@
      name="archiv-nachricht-liste-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_archiv_liste.NachrichtenArchivListe"
-     template="archiv_nachricht_liste_view.pt"
+     template="templates/archiv_nachricht_liste_view.pt"
      permission="zope2.View"
      />
 
@@ -34,7 +34,7 @@
      name="nachricht-liste-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_liste.NachrichtenListe"
-     template="nachricht_liste_view.pt"
+     template="templates/nachricht_liste_view.pt"
      permission="zope2.View"
      />
 
@@ -42,7 +42,7 @@
      name="small-archiv-nachricht-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".kleine_nachrichten_archiv_ansicht.KleineNachrichtenArchivAnsicht"
-     template="small_archiv_nachricht_view.pt"
+     template="templates/small_archiv_nachricht_view.pt"
      permission="zope2.View"
      />
 
@@ -50,7 +50,7 @@
      name="small-nachricht-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".kleine_nachrichten_ansicht.KleineNachrichtenAnsicht"
-     template="small_nachricht_view.pt"
+     template="templates/small_nachricht_view.pt"
      permission="zope2.View"
      />
 
@@ -58,7 +58,7 @@
      name="archiv-nachricht-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_archiv_ansicht.NachrichtenArchivAnsicht"
-     template="archiv_nachricht_view.pt"
+     template="templates/archiv_nachricht_view.pt"
      permission="zope2.View"
      />
 
@@ -66,7 +66,7 @@
      name="nachricht-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_ansicht.NachrichtenAnsicht"
-     template="nachricht_view.pt"
+     template="templates/nachricht_view.pt"
      permission="zope2.View"
      />
 
@@ -74,7 +74,7 @@
      name="enhanced-cardview"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_kartenansicht.ErweiterteKartenansicht"
-     template="enhanced_cardview.pt"
+     template="templates/enhanced_cardview.pt"
      permission="zope2.View"
      />
 
@@ -82,7 +82,7 @@
      name="enhanced-folderlist"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_ordnerliste.ErweiterteOrdnerliste"
-     template="enhanced_folderlist.pt"
+     template="templates/enhanced_folderlist.pt"
      permission="zope2.View"
      />
 
@@ -90,7 +90,7 @@
      name="enhanced-foldersummary"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_kurzfassung.ErweiterteKurzfassung"
-     template="enhanced_foldersummary.pt"
+     template="templates/enhanced_foldersummary.pt"
      permission="zope2.View"
      />
 
