@@ -7,6 +7,14 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+     name="enhanced-tableview"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".erweiterte_tabelle.ErweiterteTabelle"
+     template="enhanced_tableview.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="enhanced-contentdir"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweitertes_inhaltsverzeichnis.ErweitertesInhaltsverzeichnis"
