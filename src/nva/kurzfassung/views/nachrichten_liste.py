@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from nva.kurzfassung import _
+from nva.kurzfassung.views.nachrichten_ansicht import NachrichtenAnsicht
 from Products.Five.browser import BrowserView
 
 
-# from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+class NachrichtenListe(NachrichtenAnsicht):
+    """ Erbt von der Nachrichten Ansicht """
 
+    def archivlink(self):
+        return self.context.absolute_url() + '/@@archiv_nachricht_liste_view'
 
-class NachrichtenListe(BrowserView):
-    # If you want to define a template here, please remove the template from
-    # the configure.zcml registration of this view.
-    # template = ViewPageTemplateFile('nachricht_liste_view.pt')
-
-    def __call__(self):
-        self.msg = _(u'A small message')
-        return self.index()

@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from nva.kurzfassung import _
+from nva.kurzfassung.views.erweiterte_kurzfassung import ErweiterteKurzfassung
 from Products.Five.browser import BrowserView
 
 
-# from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+class ErweiterteKartenansicht(ErweiterteKurzfassung):
+    """Content-Liste wird von der erweiterten Kurzfassung geerbt und adaptiert"""
 
-
-class ErweiterteKartenansicht(BrowserView):
-    # If you want to define a template here, please remove the template from
-    # the configure.zcml registration of this view.
-    # template = ViewPageTemplateFile('enhanced_cardview.pt')
-
-    def __call__(self):
-        self.msg = _(u'A small message')
-        return self.index()
+    def cardliste(self):
+        return [self.contentlist()[i:i+2] for i in range(0, len(self.contentlist()), 2)]

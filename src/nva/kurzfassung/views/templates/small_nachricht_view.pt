@@ -1,18 +1,75 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="nva.kurzfassung"
-      metal:use-macro="context/main_template/macros/master">
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="example.conference">
 <body>
-    <metal:block fill-slot="content-core">
-      <div class="heading">
-        <li i18n:translate="">
-          Sample View
-        </li>
-      <span tal:content="view/msg">this gets replaced</span>
-      </div>
-    </metal:block>
 
-<body>
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+      <div tal:define="results view/mycontents;
+           Batch python:modules['plone.batching'].Batch;
+           b_size python:5;b_start python:0;b_start request/b_start | b_start;
+           batch python:Batch(results, b_size, int(b_start), orphan=0);">
+
+        <div class="row" tal:content="structure provider:plone.abovecontenttitle" />
+
+        <div class="row">
+          <h1 class="col-sm-12 col-xs-12" tal:content="view/mytitle"/>
+        </div>
+
+        <div class="row" tal:content="structure provider:plone.belowcontenttitle" />
+
+        <div class="row" tal:condition="view/mydesc">
+          <div id="parent-fieldname-description" class="col-sm-12 col-xs-12 documentDescription" tal:content="view/mydesc"/>
+        </div>
+
+        <div class="row" tal:content="structure provider:plone.abovecontentbody" />
+
+        <div class="row" tal:condition="view/myhtml">
+          <div class="col-sm-12 col-xs-12" tal:content="structure view/myhtml"/>
+        </div>
+
+        <div class="row" tal:condition="not:view/mycontents" tal:content="view/emptymessage"/>
+
+        <a class="btn btn-primary btn-lg" href="#" role="button">Aktuelle Nachrichten</a>
+        <a class="btn btn-default btn-lg" href="#" tal:attributes="href view/archivlink" role="button">Nachrichtenarchiv</a>
+
+        <div class="row" tal:repeat="item view/mycontents">
+
+          <div class="media">
+            <hr class="media-default"/>
+            <a href="#" tal:attributes="href item/url">
+              <div class="col-sm-3 col-xs-12">
+                <img tal:condition="item/image" src="" alt="" class="media-object img-responsive" tal:replace="structure item/image"/>
+              </div>
+
+              <div class="col-sm-9 col-xs-12">
+                <h3 class="newsDescription" tal:content="item/title">
+                  Title
+                </h3>
+                <p class="tileBody">
+                  <span tal:content="string:${item/datum}"/><br/>
+                  <span class="description" tal:content="item/description">
+                    description
+                  </span>
+                </p>
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="row" tal:content="structure provider:plone.belowcontentbody" />
+
+      </div>
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
 </html>
+
