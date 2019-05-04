@@ -1,0 +1,6 @@
+[report]
+include =
+    src/nva/*
+omit =
+    */test*
+    */upgrades/*
