@@ -7,6 +7,14 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+     name="enhanced-contentdir"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".erweitertes_inhaltsverzeichnis.ErweitertesInhaltsverzeichnis"
+     template="enhanced_contentdir.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="archiv-nachricht-liste-view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_archiv_liste.NachrichtenArchivListe"
