@@ -130,7 +130,7 @@ class ErweiterteKurzfassung(BrowserView):
         Formatiert ein Vorschaubild fuer die Ordneransichten
         """
         image = ''
-        imagetag = '<img src="%s" title="%s" class="media-object img-responsive">'
+        imagetag = '<img src="%s" title="%s" class="img-responsive">'
         imgtitle = obj.title
         if hasattr(obj, 'alttitle'):
             if obj.alttitle:
@@ -138,30 +138,30 @@ class ErweiterteKurzfassung(BrowserView):
         if hasattr(obj, 'titleimages'):
             if obj.titleimages:
                 if obj.titleimages[0].to_object:
-                    imgurl = '%s/@@images/image' % obj.titleimages[0].to_object.absolute_url()
+                    imgurl = '%s/@@images/image/preview' % obj.titleimages[0].to_object.absolute_url()
                     imgtitle = obj.titleimages[0].to_object.description
                     image = imagetag %(imgurl, imgtitle)
         if hasattr(obj, 'newsimage'):
             if obj.newsimage:
                 if obj.newsimage.to_object:
-                    imgurl = '%s/@@images/image/thumb' % obj.newsimage.to_object.absolute_url()
+                    imgurl = '%s/@@images/image/preview' % obj.newsimage.to_object.absolute_url()
                     imgtitle = obj.newsimage.to_object.title
                     image = imagetag %(imgurl, obj.newsimage.to_object.title)
         if hasattr(obj, 'poster'):
             if obj.poster:
-                imgurl = '%s/@@images/poster/thumb' %obj.absolute_url()
+                imgurl = '%s/@@images/poster/preview' %obj.absolute_url()
                 image = imagetag %(imgurl,imgtitle)
         if hasattr(obj, 'schmuckbild'):
             if obj.schmuckbild:
                 image = self.getSchmuckbild(imagetag, obj)
         if hasattr(obj, 'portraet'):
             if obj.portraet:
-                imgurl = '%s/@@images/portraet/thumb' %obj.absolute_url()
+                imgurl = '%s/@@images/portraet/preview' %obj.absolute_url()
                 image = imagetag %(imgurl, imgtitle)
         if hasattr(obj, 'image'):
             if obj.image:
-                imgurl = '%s/@@images/image' %obj.absolute_url()
-                image = imagetag %(imgurl, imagetitle)
+                imgurl = '%s/@@images/image/preview' %obj.absolute_url()
+                image = imagetag %(imgurl, imgtitle)
         if not image and obj.portal_type == "News Item":
             image = getDefault()
 
@@ -195,7 +195,7 @@ class ErweiterteKurzfassung(BrowserView):
             entry['url'] = obj.absolute_url()
             if obj.portal_type == 'Link':
                 entry['url'] = self.formatLink(obj)
-            entry['excludeFromDisplay'] = self.showInDisplay(obj)
+            entry['excludeFromDisplay'] = self.excludeFromDisplay(obj)
             entry['image'] = self.formatPreviewImage(obj)
             entry['video'] = self.formatVideo(obj)
             if not self.excludeFromDisplay(obj):
@@ -211,5 +211,4 @@ class ErweiterteKurzfassung(BrowserView):
             if self.context.text:
                 self.myhtml = self.context.text.output
         self.emptymessage = self.leermeldung()
-        self.mycontents = self.formatcontent()
-
+        return self.formatcontent()

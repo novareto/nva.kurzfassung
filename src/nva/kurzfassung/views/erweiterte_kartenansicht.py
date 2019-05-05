@@ -8,5 +8,5 @@ from Products.Five.browser import BrowserView
 class ErweiterteKartenansicht(ErweiterteKurzfassung):
     """Content-Liste wird von der erweiterten Kurzfassung geerbt und adaptiert"""
 
-    def cardliste(self):
+    def cardlist(self):
         return [self.contentlist()[i:i+2] for i in range(0, len(self.contentlist()), 2)]

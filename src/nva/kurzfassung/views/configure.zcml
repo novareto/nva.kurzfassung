@@ -6,6 +6,8 @@
 
   -*- extra stuff goes here -*-
 
+  <include package="plone.app.contentmenu" />
+
   <browser:page
      name="enhanced_tableview"
      for="Products.CMFCore.interfaces.IFolderish"
@@ -94,5 +96,29 @@
      permission="zope2.View"
      />
 
+  <browser:menuItems
+     for="*"
+     menu="plone_displayviews">
+     <browser:menuItem
+       title="Erweiterte Kurzfassung"
+       action="enhanced_foldersummary"
+       description="Erweiterte Kurzfassung fuer Plone"
+     />
+     <browser:menuItem
+       title="Kartenansicht"
+       action="enhanced_cardview"
+       description="Kartenansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Inhaltsverzeichnis"
+       action="enhanced_contentdir"
+       description="Inhaltsverzeichnis fuer Plone"
+     />
+     <browser:menuItem
+       title="Tabellenansicht"
+       action="enhanced_tableview"
+       description="Inhaltsverzeichnis fuer Plone"
+     />
+  </browser:menuItems>
 
 </configure>
