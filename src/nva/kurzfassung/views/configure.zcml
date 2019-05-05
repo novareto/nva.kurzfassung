@@ -7,7 +7,7 @@
   -*- extra stuff goes here -*-
 
   <browser:page
-     name="enhanced-tableview"
+     name="enhanced_tableview"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_tabelle.ErweiterteTabelle"
      template="templates/enhanced_tableview.pt"
@@ -15,7 +15,7 @@
      />
 
   <browser:page
-     name="enhanced-contentdir"
+     name="enhanced_contentdir"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweitertes_inhaltsverzeichnis.ErweitertesInhaltsverzeichnis"
      template="templates/enhanced_contentdir.pt"
@@ -23,7 +23,7 @@
      />
 
   <browser:page
-     name="archiv-nachricht-liste-view"
+     name="archiv_nachricht_liste_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_archiv_liste.NachrichtenArchivListe"
      template="templates/archiv_nachricht_liste_view.pt"
@@ -31,7 +31,7 @@
      />
 
   <browser:page
-     name="nachricht-liste-view"
+     name="nachricht_liste_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_liste.NachrichtenListe"
      template="templates/nachricht_liste_view.pt"
@@ -39,7 +39,7 @@
      />
 
   <browser:page
-     name="small-archiv-nachricht-view"
+     name="small_archiv_nachricht_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".kleine_nachrichten_archiv_ansicht.KleineNachrichtenArchivAnsicht"
      template="templates/small_archiv_nachricht_view.pt"
@@ -47,7 +47,7 @@
      />
 
   <browser:page
-     name="small-nachricht-view"
+     name="small_nachricht_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".kleine_nachrichten_ansicht.KleineNachrichtenAnsicht"
      template="templates/small_nachricht_view.pt"
@@ -55,7 +55,7 @@
      />
 
   <browser:page
-     name="archiv-nachricht-view"
+     name="archiv_nachricht_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_archiv_ansicht.NachrichtenArchivAnsicht"
      template="templates/archiv_nachricht_view.pt"
@@ -63,7 +63,7 @@
      />
 
   <browser:page
-     name="nachricht-view"
+     name="nachricht_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".nachrichten_ansicht.NachrichtenAnsicht"
      template="templates/nachricht_view.pt"
@@ -71,7 +71,7 @@
      />
 
   <browser:page
-     name="enhanced-cardview"
+     name="enhanced_cardview"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_kartenansicht.ErweiterteKartenansicht"
      template="templates/enhanced_cardview.pt"
@@ -79,7 +79,7 @@
      />
 
   <browser:page
-     name="enhanced-folderlist"
+     name="enhanced_folderlist"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_ordnerliste.ErweiterteOrdnerliste"
      template="templates/enhanced_folderlist.pt"
@@ -87,7 +87,7 @@
      />
 
   <browser:page
-     name="enhanced-foldersummary"
+     name="enhanced_foldersummary"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_kurzfassung.ErweiterteKurzfassung"
      template="templates/enhanced_foldersummary.pt"
