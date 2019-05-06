@@ -105,6 +105,11 @@
        description="Erweiterte Kurzfassung fuer Plone"
      />
      <browser:menuItem
+       title="Erweiterte Ordnerliste"
+       action="enhanced_folderlist"
+       description="Erweiterte Ordnerliste fuer Plone"
+     />
+     <browser:menuItem
        title="Kartenansicht"
        action="enhanced_cardview"
        description="Kartenansicht fuer Plone"
@@ -117,7 +122,22 @@
      <browser:menuItem
        title="Tabellenansicht"
        action="enhanced_tableview"
-       description="Inhaltsverzeichnis fuer Plone"
+       description="Tabellenansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Nachrichten-Ansicht"
+       action="nachricht_view"
+       description="Nachrichtenansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Nachrichten-Ansicht (klein)"
+       action="small_nachricht_view"
+       description="Nachrichtenansicht mit kleinen Bildern fuer Plone"
+     />
+     <browser:menuItem
+       title="Nachrichten-Liste"
+       action="nachricht_liste_view"
+       description="Nachrichtenliste fuer Plone"
      />
   </browser:menuItems>
 

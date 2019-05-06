@@ -16,7 +16,7 @@ class NachrichtenArchivAnsicht(ErweiterteKurzfassung):
         start = DateTime.DateTime() - 365
         date_range_query = { 'query':(start,end), 'range': 'min:max'}
         pathes = []
-        path = u''.join(self.context.getPhysicalPath(), '/')
+        path = u'/'.join(self.context.getPhysicalPath())
         pathes.append(path)
         if hasattr(self.context, 'newsfolder'):
             if self.context.newsfolder:
