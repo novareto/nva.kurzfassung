@@ -117,7 +117,8 @@ class ErweiterteKurzfassung(BrowserView):
         try:
             contentid = selectSchmuckbilder(self.context).getTerm(obj.schmuckbild).token
             brain = api.content.find(portal_type='Image', UID=contentid)[0]
-            imgurl = brain.getURL()
+            imgobj = brain.getObject()
+            imgurl = '%s/@@images/image/mini' %imgobj.absolute_url()
             imgtitle = brain.Description
             image = imagetag %(imgurl, imgtitle)
         except:
