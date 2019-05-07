@@ -38,28 +38,32 @@
           <div class="col-sm-12 col-xs-12" tal:content="structure view/myhtml"/>
         </div>
 
-        <a class="btn btn-default btn-lg" href="#" tal:attributes="href view/aktuelllink" role="button">Aktuelle Nachrichten</a>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Nachrichtenarchiv</a>
+        <div style="margin-top:20px; margin-bottom:20px" class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="btn-group" role="group">
+              <a class="btn btn-secondary btn-lg" href="#" tal:attributes="href view/aktuelllink" role="button">Aktuelle Nachrichten</a>
+              <a class="btn btn-success btn-lg" href="#" role="button">Nachrichtenarchiv</a>
+            </div>
+          </div>
+        </div>
 
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
         <div class="row" tal:repeat="item results">
-          <div class="media">
           <hr class="media-default"/>
-            <a href="#" tal:attributes="href item/url">
-              <div class="col-sm-12 col-xs-12">
-                <h3 class="newsDescription" tal:content="item/title">
-                  Title
-                </h3>
-                <p tal:content="string:Datum ${item/datum}"/>
-                <p class="tileBody">
-                  <span class="description" tal:content="item/description">
-                    description
-                  </span>
-                </p>
-              </div>
-            </a>
-          </div>
+          <a href="#" tal:attributes="href item/url">
+            <div class="col-sm-12 col-xs-12">
+              <h3 class="newsDescription" tal:content="item/title">
+                Title
+              </h3>
+              <p tal:content="string:Datum ${item/datum}"/>
+              <p class="tileBody">
+                <span class="description" tal:content="item/description">
+                  description
+                </span>
+              </p>
+            </div>
+          </a>
         </div>
 
         <div class="row">

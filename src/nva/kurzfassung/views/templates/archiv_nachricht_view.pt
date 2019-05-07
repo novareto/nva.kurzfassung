@@ -41,70 +41,86 @@
 
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
-        <a class="btn btn-default btn-lg" href="#" tal:attributes="href view/aktuelllink" role="button">Aktuelle Nachrichten</a>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Nachrichtenarchiv</a>
+
+        <div style="margin-top:20px; margin-bottom:20px" class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="btn-group" role="group">
+              <a class="btn btn-secondary btn-lg" href="#" tal:attributes="href view/aktuelllink" role="button">Aktuelle Nachrichten</a>
+              <a class="btn btn-success btn-lg" href="#" role="button">Nachrichtenarchiv</a>
+            </div>
+          </div>
+        </div>
 
         <div class="row" tal:repeat="item results">
 
-          <div style="margin-bottom:20px;" tal:condition="not:item/video" class="media">
+          <div style="margin-bottom:20px;" tal:condition="not:item/video" class="col-xs-12 col-sm-12">
             <hr style="margin-bottom:20px;" class="media-default"/>
             <a href="#" tal:attributes="href item/url">
 
-              <div class="col-sm-12 col-xs-12">
-                <h3 class="newsDescription" tal:content="item/title">
-                  Title
-                </h3>
+              <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                  <h3 class="newsDescription" tal:content="item/title">
+                    Title
+                  </h3>
+                </div>
               </div>
 
-              <div tal:condition="item/image" class="col-sm-5 col-xs-7">
-                <img src="" alt="" class="media-object img-responsive" tal:replace="structure item/image"/>
-              </div>
+              <div class="row">
+                <div tal:condition="item/image" class="col-sm-5 col-xs-7">
+                  <img src="" alt="" class="media-object img-responsive" tal:replace="structure item/image"/>
+                </div>
 
-              <div tal:condition="item/image" class="col-sm-7 col-xs-12">
-                <p class="tileBody">
-                  <span tal:content="string:${item/datum}"/><br/>
-                  <span class="description" tal:content="item/description">
-                    description
-                  </span>
-                </p>
-              </div>
+                <div tal:condition="item/image" class="col-sm-7 col-xs-12">
+                  <p class="tileBody">
+                    <span tal:content="string:${item/datum}"/><br/>
+                    <span class="description" tal:content="item/description">
+                      description
+                    </span>
+                  </p>
+                </div>
 
-              <div tal:condition="not:item/image" class="col-sm-12 col-xs-12">
-                <p class="tileBody">
-                  <span tal:content="string:${item/datum}"/><br/>
-                  <span class="description" tal:content="item/description">
-                    description
-                  </span>
-                </p>
+                <div tal:condition="not:item/image" class="col-sm-12 col-xs-12">
+                  <p class="tileBody">
+                    <span tal:content="string:${item/datum}"/><br/>
+                    <span class="description" tal:content="item/description">
+                      description
+                    </span>
+                  </p>
+                </div>
               </div>
             </a>
           </div>
 
-          <div style="margin-bottom:20px;" tal:condition="item/video" tal:define="video item/video" class="media video-view">
+          <div style="margin-bottom:20px;" tal:condition="item/video" tal:define="video item/video" class="col-xs-12 col-sm-12">
             <hr style="margin-bottom:20px;" class="media-default">
-            <div class="col-sm-12 col-xs-12">
-              <h3 class="newsDescription" style="color:#004994;" tal:content="item/title">
-                Title
-              </h3>
+            
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <h3 class="newsDescription" style="color:#004994;" tal:content="item/title">
+                  Title
+                </h3>
+              </div>
             </div>
 
-            <div tal:condition="video/embed" class="col-sm-5 col-xs-12">
-              <span tal:replace="structure video/embed"/>
-            </div>
-            <div tal:condition="video/src" class="col-sm-5 col-xs-12">
-              <div class="video-wrapper">
-                <video width="640" height="360" style="width: 100%; height: 100%;" controls>
-                  <source type="video/youtube" tal:attributes="src video/src;type video/videotype"/>
-                </video>
+            <div class="row">
+              <div tal:condition="video/embed" class="col-sm-5 col-xs-12">
+                <span tal:replace="structure video/embed"/>
               </div>
-            </div>
-            <a href="#" tal:attributes="href item/url">
-              <div class="col-sm-7 col-xs-12">
-                <p class="tileBody">
-                  <span class="description" tal:content="item/description"/>
-                </p>
+              <div tal:condition="video/src" class="col-sm-5 col-xs-12">
+                <div class="video-wrapper">
+                  <video width="640" height="360" style="width: 100%; height: 100%;" controls>
+                    <source type="video/youtube" tal:attributes="src video/src;type video/videotype"/>
+                  </video>
+                </div>
               </div>
-            </a>
+              <a href="#" tal:attributes="href item/url">
+                <div class="col-sm-7 col-xs-12">
+                  <p class="tileBody">
+                    <span class="description" tal:content="item/description"/>
+                  </p>
+                </div>
+              </a>
+            </div>
           </div>
 
         </div>

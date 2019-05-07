@@ -40,30 +40,40 @@
 
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
-        <a class="btn btn-default btn-lg" href="#" tal:attributes="href view/aktuelllink" role="button">Aktuelle Nachrichten</a>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Nachrichtenarchiv</a>
+
+
+        <div style="margin-top:20px; margin-bottom:20px" class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="btn-group" role="group">
+              <a class="btn btn-secondary btn-lg" href="#" tal:attributes="href view/aktuelllink" role="button">Aktuelle Nachrichten</a>
+              <a class="btn btn-success btn-lg" href="#" role="button">Nachrichtenarchiv</a>
+            </div>
+          </div>
+        </div>
 
         <div class="row" tal:repeat="item results">
 
-          <div class="media">
-            <hr class="media-default"/>
-            <a href="#" tal:attributes="href item/url">
-              <div class="col-sm-3 col-xs-12">
+          <div class="card mb-3">
+            <div class="row no-gutters">      
+              <div class="col-md-4">
                 <img tal:condition="item/image" src="" alt="" class="media-object img-responsive" tal:replace="structure item/image"/>
               </div>
-
-              <div class="col-sm-9 col-xs-12">
-                <h3 class="newsDescription" tal:content="item/title">
-                  Title
-                </h3>
-                <p class="tileBody">
-                  <span tal:content="string:${item/datum}"/><br/>
-                  <span class="description" tal:content="item/description">
-                    description
-                  </span>
-                </p>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="#" tal:attributes="href item/url">
+                    <h3 class="card-title" tal:content="item/title">
+                      Title
+                    </h3>
+                    <p class="card-text">
+                      <span tal:content="string:${item/datum}"/><br/>
+                      <span class="description" tal:content="item/description">
+                      description
+                      </span>
+                    </p>
+                  </a>
+                </div>
               </div>
-            </a>
+            </div>
           </div>
 
         </div>

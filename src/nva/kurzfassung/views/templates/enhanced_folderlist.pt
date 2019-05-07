@@ -42,10 +42,9 @@
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
         <div class="row" tal:repeat="item results">
-          <div class="media">
+          <div class="col-sm-12 col-xs-12">
             <hr class="media-default"/>
             <a href="#" tal:attributes="href item/url">
-            <div class="col-sm-12 col-xs-12">
                 <h3 class="newsDescription" tal:content="item/title">
                     Title
                 </h3>
@@ -54,7 +53,6 @@
                         description
                     </span>
                 </p>
-            </div>
             </a>
           </div>
         </div>

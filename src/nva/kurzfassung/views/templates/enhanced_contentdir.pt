@@ -44,13 +44,9 @@
 
           <div class="col-sm-12 col-xs-12">
 
-            <table class="table table-striped">
-              <tbody>
-                <tr tal:repeat="item results">
-                  <td><a href="" tal:attributes="href item/url" tal:content="item/title"/></td>
-                </tr>
-              </tbody>
-            </table>
+            <ul class="list-group">
+              <li tal:repeat="item results" class="list-group-item"><a href="" tal:attributes="href item/url" tal:content="item/title"/></li>
+            </ul>
 
           </div>
 

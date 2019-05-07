@@ -40,28 +40,25 @@
 
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
-        <div class="row" tal:repeat="sublist view/cardlist">
+        <div class="row">
 
-          <div class="col-sm-12 col-xs-12">
-            <div tal:repeat="item sublist" class="col-sm-6 col-xs-12">
+            <div tal:repeat="cards view/cardlist" style="margin-bottom:20px" class="card-deck">
 
-              <div tal:condition="not:item/video" class="media">
-                <hr class="media-default" />
-                <a href="" tal:attributes="href item/url">
-                  <div style="margin-bottom:20px;" class="col-sm-12 col-xs-12">
-                    <img tal:condition="item/image" src="" alt="" class="media-object img-responsive"
-                      tal:replace="structure item/image"/>
-                  </div>
-                  <div class="col-sm-12 col-xs-12">
+              <div tal:repeat="item cards" class="card bg-light mb-3">
+                  <img tal:condition="item/image" src="" alt="" class="card-img-top"
+                       tal:replace="structure item/image"/>
+                  <div class="card-body">
                     <h3 class="newsDescription video-view-description" tal:content="item/title"></h3>
                     <p class="tileBody">
                       <span class="description" tal:content="item/description"/>
                     </p>
                   </div>
-                </a>
+                  <div class="card-footer bg-light border-dark">
+                    <a href="" class="card-link" tal:attributes="href item/url">Weiterlesen</a>
+                  </div>
               </div>
 
-              <div tal:condition="item/video" class="media video-view">
+              <!--<div tal:condition="item/video" class="media video-view">
                 <hr class="media-default" />
                 <div style="margin-bottom:20px;" tal:define="video item/video" tal:condition="video/src" class="col-sm-12 col-xs-12">
                   <div class="video-wrapper">
@@ -79,10 +76,9 @@
                     <span class="description" tal:content="item/description"/>
                   </p>
                 </div>
-              </div>
+              </div>-->
 
             </div>
-          </div>
 
         </div>
 
