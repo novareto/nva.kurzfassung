@@ -6,6 +6,14 @@
 
   -*- extra stuff goes here -*-
 
+  <browser:page
+     name="zwei-spalten-view"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".zwei_spalten_ansicht.ZweiSpaltenAnsicht"
+     template="zwei_spalten_view.pt"
+     permission="zope2.View"
+     />
+
   <include package="plone.app.contentmenu" />
 
   <browser:page

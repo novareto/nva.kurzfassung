@@ -180,6 +180,28 @@ class ErweiterteKurzfassung(BrowserView):
         return video
 
 
+    def getContextInformationen(obj):
+        """
+        Formatiert die Contextinformationen
+        """
+        contextlist = []
+        if hasattr(obj, 'contextlets'):
+            for i in obj.contextlets:
+                entry = {}
+                contextobj = i.to_object
+                entry['type'] = contextobj.portal_type
+                entry['title'] = contextobj.title
+                entry['text'] = ''
+                if contextobj.portal_type in ['Document', 'News Item']:
+                    if contextobj.text:
+                        entry['text'] = contextobj.text.output
+                entry['imageurl'] = ''
+                    if contextobj.image
+                        entry['imageurl'] = '%s/@@image/image/preview' % contextobj.absolute_url()
+                contextlist.append(entry)
+        return contextlist 
+                
+
     def formatcontent(self):
         """
         Formatiert die Ordnerinhalte
@@ -192,6 +214,10 @@ class ErweiterteKurzfassung(BrowserView):
             entry['description'] = obj.description
             if obj.portal_type == 'LDAPPerson':
                 entry['description'] = self.formatPerson(obj)
+            entry['text'] = ''
+            if hasattr(obj, 'text'):
+                if obj.text:
+                    entry['text'] = obj.text.output
             entry['datum'] = i.created.strftime('%d.%m.%Y')
             entry['url'] = obj.absolute_url()
             if obj.portal_type == 'Link':
@@ -201,6 +227,7 @@ class ErweiterteKurzfassung(BrowserView):
             entry['video'] = self.formatVideo(obj)
             if not self.excludeFromDisplay(obj):
                 contents.append(entry)
+            entry['contextlets'] = self.getContextInformationen(obj)
         return contents
 
 
