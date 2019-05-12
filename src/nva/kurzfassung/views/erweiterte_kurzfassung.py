@@ -180,13 +180,13 @@ class ErweiterteKurzfassung(BrowserView):
         return video
 
 
-    def getContextInformationen(obj):
+    def getContextCards(self, obj):
         """
         Formatiert die Contextinformationen
         """
-        contextlist = []
-        if hasattr(obj, 'contextlets'):
-            for i in obj.contextlets:
+        cardlist = []
+        if hasattr(obj, 'cards'):
+            for i in obj.cards:
                 entry = {}
                 contextobj = i.to_object
                 entry['type'] = contextobj.portal_type
@@ -196,10 +196,11 @@ class ErweiterteKurzfassung(BrowserView):
                     if contextobj.text:
                         entry['text'] = contextobj.text.output
                 entry['imageurl'] = ''
-                    if contextobj.image
-                        entry['imageurl'] = '%s/@@image/image/preview' % contextobj.absolute_url()
-                contextlist.append(entry)
-        return contextlist 
+                if contextobj.portal_type in ['Image']:
+                    if contextobj.image:
+                        entry['imageurl'] = '%s/@@images/image/preview' % contextobj.absolute_url()
+                cardlist.append(entry)
+        return cardlist 
                 
 
     def formatcontent(self):
@@ -227,7 +228,7 @@ class ErweiterteKurzfassung(BrowserView):
             entry['video'] = self.formatVideo(obj)
             if not self.excludeFromDisplay(obj):
                 contents.append(entry)
-            entry['contextlets'] = self.getContextInformationen(obj)
+            entry['cards'] = self.getContextCards(obj)
         return contents
 
 

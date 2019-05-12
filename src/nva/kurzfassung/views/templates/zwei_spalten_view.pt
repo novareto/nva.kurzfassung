@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="example.conference">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+      <div tal:define="results view/contentlist;
+           Batch python:modules['plone.batching'].Batch;
+           b_size python:5;b_start python:0;b_start request/b_start | b_start;
+           batch python:Batch(results, b_size, int(b_start), orphan=0);">
+
+
+        <div class="row">
+          <span class="col-sm12 col-xs-12" tal:content="structure provider:plone.abovecontenttitle" />
+        </div>
+
+        <div class="row">
+          <h1 class="col-sm-12 col-xs-12" tal:content="view/mytitle"/>
+        </div>
+
+        <div class="row">
+          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.belowcontenttitle" />
+        </div>
+
+        <div class="row" tal:condition="view/mydesc">
+          <div id="parent-fieldname-description" class="col-sm-12 col-xs-12 documentDescription" tal:content="view/mydesc"/>
+        </div>
+
+        <div class="row">
+          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.abovecontentbody" />
+        </div>
+
+        <div class="row" tal:condition="view/myhtml">
+          <div class="col-sm-12 col-xs-12" tal:content="structure view/myhtml"/>
+        </div>
+
+        <div class="row">
+          <span class="col-sm-12 col-xs-12" tal:condition="not:results" tal:content="view/emptymessage"/>
+        </div>
+
+        <div class="row" tal:repeat="item results"><!--Items-->
+
+                <div class="col-sm-8 col-xs-12"><!--linke Spalte-->
+                  <div class = "row">
+                      <div class="col-sm-12 col-xs-12">
+                        <h3 class="newsDescription" tal:content="item/title">
+                          Title
+                        </h3>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div tal:condition="item/image" class="col-sm-4 col-xs-12">
+                      <img src="" alt="" class="media-object img-responsive" tal:replace="structure item/image"/>
+                    </div>
+
+                    <div tal:condition="item/image" class="col-sm-8 col-xs-12">
+                      <p class="tileBody">
+                        <span class="description" tal:content="item/description">
+                          description
+                        </span>
+                      </p>
+                    </div>
+
+                    <div tal:condition="not:item/image" class="col-sm-12 col-xs-12">
+                      <p class="tileBody">
+                        <span class="description" tal:content="item/description">
+                        description
+                        </span>
+                      </p>
+                    </div>
+             
+                    <div tal:condition="item/text" class="col-sm-12 col-xs-12">
+                      <span tal:replace="structure item/text"/>
+                    </div>
+                  </div>
+                </div><!--Ende linke Spalte-->
+                
+                <div class="col-sm-4 col-xs-12"><!--rechte Spalte-->
+                
+                <div tal:repeat="card item/cards">
+                  <div style="margin-bottom:15px" tal:condition="python:card.get('type')!='Image'" class="card">
+                    <div class="card-body">
+                      <h4 tal:content="card/title"/>
+                      <p class="card-text" tal:content="structure card/text"/>
+                      <!--<div class="card-header" tal:content="card/title">Header</div>
+                      <div class="card-body">
+	                <p style="width:100px;" class="card-text" tal:condition="card/text" tal:content="structure card/text"/>
+	                <img tal:condition="card/imageurl" class="img-fluid" tal:attributes="src card/imageurl"/>
+                      </div>-->
+                    </div>
+                  </div>
+                  <div style="margin-bottom:15px" tal:condition="python:card.get('type')=='Image'">
+	              <img tal:condition="card/imageurl" class="img-fluid" tal:attributes="src card/imageurl"/>
+                  </div>
+                </div>
+
+                </div><!-- Ende rechte Spalte -->
+
+        </div><!--Items-->
+
+        <div class="row">
+          <span class="row" tal:content="structure provider:plone.belowcontentbody" />
+        </div>
+
+      </div>
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
