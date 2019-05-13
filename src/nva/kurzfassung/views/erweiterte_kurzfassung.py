@@ -136,36 +136,47 @@ class ErweiterteKurzfassung(BrowserView):
         if hasattr(obj, 'alttitle'):
             if obj.alttitle:
                 imgtitle = obj.alttitle
-        if hasattr(obj, 'titleimages'):
-            if obj.titleimages:
-                if obj.titleimages[0].to_object:
-                    imgurl = '%s/@@images/image/large' % obj.titleimages[0].to_object.absolute_url()
-                    imgtitle = obj.titleimages[0].to_object.description
-                    image = imagetag %(imgurl, imgtitle)
+        if hasattr(obj, 'image'):
+            if obj.image:
+                imgurl = '%s/@@images/image/large' %obj.absolute_url()
+                image = imagetag %(imgurl, imgtitle)
+                return image
+        if hasattr(obj, 'bild'):
+            if obj.bild:
+                imgurl = '%s/@@images/bild/large' %obj.absolute_url()
+                image = imagetag %(imgurl, imgtitle)
+                return image
+        if hasattr(obj, 'portraet'):
+            if obj.portraet:
+                imgurl = '%s/@@images/portraet/large' %obj.absolute_url()
+                image = imagetag %(imgurl, imgtitle)
+                return image
+        if hasattr(obj, 'schmuckbild'):
+            if obj.schmuckbild:
+                image = self.getSchmuckbild(imagetag, obj)
+                return image 
+        if hasattr(obj, 'poster'):
+            if obj.poster:
+                imgurl = '%s/@@images/poster/large' %obj.absolute_url()
+                image = imagetag %(imgurl,imgtitle)
+                return image
         if hasattr(obj, 'newsimage'):
             if obj.newsimage:
                 if obj.newsimage.to_object:
                     imgurl = '%s/@@images/image/large' % obj.newsimage.to_object.absolute_url()
                     imgtitle = obj.newsimage.to_object.title
                     image = imagetag %(imgurl, obj.newsimage.to_object.title)
-        if hasattr(obj, 'poster'):
-            if obj.poster:
-                imgurl = '%s/@@images/poster/large' %obj.absolute_url()
-                image = imagetag %(imgurl,imgtitle)
-        if hasattr(obj, 'schmuckbild'):
-            if obj.schmuckbild:
-                image = self.getSchmuckbild(imagetag, obj)
-        if hasattr(obj, 'portraet'):
-            if obj.portraet:
-                imgurl = '%s/@@images/portraet/large' %obj.absolute_url()
-                image = imagetag %(imgurl, imgtitle)
-        if hasattr(obj, 'image'):
-            if obj.image:
-                imgurl = '%s/@@images/image/large' %obj.absolute_url()
-                image = imagetag %(imgurl, imgtitle)
+                    return image
+        if hasattr(obj, 'titleimages'):
+            print 'titleimages'
+            if obj.titleimages:
+                if obj.titleimages[0].to_object:
+                    imgurl = '%s/@@images/image/large' % obj.titleimages[0].to_object.absolute_url()
+                    imgtitle = obj.titleimages[0].to_object.description
+                    image = imagetag %(imgurl, imgtitle)
+                    return image
         if not image and obj.portal_type == "News Item":
             image = getDefault()
-
         return image
 
 
@@ -215,10 +226,16 @@ class ErweiterteKurzfassung(BrowserView):
             entry['description'] = obj.description
             if obj.portal_type == 'LDAPPerson':
                 entry['description'] = self.formatPerson(obj)
+            if obj.portal_type in ["Schutzhandschuh", "Hautreinigungsmittel", "Hautschutzmittel", "Hautpflegemittel", "Desinfektionsmittel"]:
+                if obj.hersteller:
+                    entry['description'] = obj.hersteller.to_object.title 
             entry['text'] = ''
             if hasattr(obj, 'text'):
                 if obj.text:
-                    entry['text'] = obj.text.output
+                    try:
+                        entry['text'] = obj.text.output
+                    except:
+                        entry['text'] = obj.text
             entry['datum'] = i.created.strftime('%d.%m.%Y')
             entry['url'] = obj.absolute_url()
             if obj.portal_type == 'Link':
