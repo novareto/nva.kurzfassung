@@ -90,7 +90,7 @@
 
   <browser:page
      name="enhanced_foldersummary"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="plone.dexterity.interfaces.IDexterityContent"
      class=".erweiterte_kurzfassung.ErweiterteKurzfassung"
      template="templates/enhanced_foldersummary.pt"
      permission="zope2.View"

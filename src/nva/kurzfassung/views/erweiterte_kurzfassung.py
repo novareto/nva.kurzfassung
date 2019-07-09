@@ -167,6 +167,11 @@ class ErweiterteKurzfassung(BrowserView):
                     imgtitle = obj.newsimage.to_object.title
                     image = imagetag %(imgurl, obj.newsimage.to_object.title)
                     return image
+        if hasattr(obj, 'titleimage'):
+            if obj.titleimage:
+                imgurl = '%s/@@images/titleimage/mini' % obj.absolute_url()
+                image = imagetag %(imgurl, imgtitle)
+                return image
         if hasattr(obj, 'titleimages'):
             print 'titleimages'
             if obj.titleimages:
