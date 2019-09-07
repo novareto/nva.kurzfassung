@@ -51,7 +51,6 @@ class ErweiterteKartenansicht(ErweiterteKurzfassung):
                     image = imagetag %(imgurl, obj.newsimage.to_object.title)
                     return image
         if hasattr(obj, 'titleimages'):
-            print 'titleimages'
             if obj.titleimages:
                 if obj.titleimages[0].to_object:
                     imgurl = '%s/@@images/image/large' % obj.titleimages[0].to_object.absolute_url()
