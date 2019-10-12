@@ -81,6 +81,14 @@
      />
 
   <browser:page
+     name="enhanced_cardcolumns"
+     for="*"
+     class=".erweiterte_kartenansicht.ErweiterteKartenspalten"
+     template="templates/enhanced_cardcolumns.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="enhanced_folderlist"
      for="*"
      class=".erweiterte_ordnerliste.ErweiterteOrdnerliste"
@@ -131,6 +139,11 @@
        description="Kartenansicht fuer Plone"
      />
      <browser:menuItem
+       title="Spalten mit Karten"
+       action="enhanced_cardcolumns"
+       description="Kartenansicht fuer Plone"
+     />
+     <browser:menuItem
        title="Inhaltsverzeichnis"
        action="enhanced_contentdir"
        description="Inhaltsverzeichnis fuer Plone"
@@ -139,6 +152,16 @@
        title="Tabellenansicht"
        action="enhanced_tableview"
        description="Tabellenansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Zwei Spalten Ansicht"
+       action="zwei_spalten_view"
+       description="Zwei Spalten Ansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Zwei Spalten mit Karten zum Inhalt"
+       action="zwei_spalten_context_view"
+       description="Zwei Spalten Ansicht fuer Plone"
      />
      <browser:menuItem
        title="Nachrichten-Ansicht"
@@ -154,16 +177,6 @@
        title="Nachrichten-Liste"
        action="nachricht_liste_view"
        description="Nachrichtenliste fuer Plone"
-     />
-     <browser:menuItem
-       title="Zwei Spalten Ansicht"
-       action="zwei_spalten_view"
-       description="Zwei Spalten Ansicht fuer Plone"
-     />
-     <browser:menuItem
-       title="Karten zum Inhalt"
-       action="zwei_spalten_context_view"
-       description="Zwei Spalten Ansicht fuer Plone"
      />
   </browser:menuItems>
 

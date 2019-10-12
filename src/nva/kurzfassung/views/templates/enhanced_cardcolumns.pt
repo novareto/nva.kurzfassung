@@ -10,107 +10,101 @@
     <tal:main-macro metal:define-macro="main">
 
       <div tal:define="results view/contentlist;
+           batchvalue view/batchvalue;
            Batch python:modules['plone.batching'].Batch;
-           b_size python:5;b_start python:0;b_start request/b_start | b_start;
+           b_size python:batchvalue;b_start python:0;b_start request/b_start | b_start;
            batch python:Batch(results, b_size, int(b_start), orphan=0);">
 
  
         <div class="row">
-          <span class="col-sm12 col-xs-12" tal:content="structure provider:plone.abovecontenttitle" />
+          <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
+
         <div class="row">
-          <h1 class="col-sm-12 col-xs-12" tal:content="view/mytitle"/>
+          <h1 class="col-sm-12 col-12" tal:content="view/mytitle"/>
           <a name="pagetop"></a>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.belowcontenttitle" />
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.belowcontenttitle" />
         </div>
 
         <div class="row" tal:condition="view/mydesc">
-          <div id="parent-fieldname-description" class="col-sm-12 col-xs-12 documentDescription" tal:content="view/mydesc"/>
+          <div id="parent-fieldname-description" class="col-sm-12 col-12 documentDescription" tal:content="view/mydesc"/>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.abovecontentbody" />
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.abovecontentbody" />
         </div>
 
         <div class="row" tal:condition="view/myhtml">
-          <div class="col-sm-12 col-xs-12" tal:content="structure view/myhtml"/>
+          <div class="col-sm-12 col-12" tal:content="structure view/myhtml"/>
         </div>
 
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
         <div class="row">
 
-          <div tal:condition="view/getFolderCards" class="col-sm-3 col-xs-12">
+          <div tal:condition="view/mastercards" class="col-sm-8 col-12">    
+            <div class="card-columns mb-3">
+              <div tal:repeat="item batch" class="card bg-light mb-3">
+                  <a href="" class="card-link" tal:attributes="href item/url">
+                    <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
+                    <div class="card-body">
+                      <h6 class=""><strong tal:content="item/title"/></h6>
+                      <p class="card-text">
+                        <span class="description" tal:content="item/description"/>
+                      </p>
+                    </div>
+                  </a>  
+              </div>
+            </div>
+          </div>
 
-            <div tal:repeat="card view/getFolderCards">
-              <div style="margin-bottom:15px" tal:condition="python:card.get('type')!='Image'" class="card bg-light mb-3">
-                <div class="card-header">
-                  <span tal:replace="card/title"/>
-                </div>
-                <div class="card-body">
-                  <p class="card-text" tal:content="structure card/text"/>
-                      <!--<div class="card-header" tal:content="card/title">Header</div>
-                      <div class="card-body">
-                        <p style="width:100px;" class="card-text" tal:condition="card/text" tal:content="structure card/text"/>
-                        <img tal:condition="card/imageurl" class="img-fluid" tal:attributes="src card/imageurl"/>
-                      </div>-->
+          <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+            <div tal:repeat="card view/mastercards">
+              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3">
+                <div class="card-header" tal:content="card/title">Header</div>
+                <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
+                <div class="card-body" tal:content="structure card/text">
                 </div>
               </div>
-              <div style="margin-bottom:15px" tal:condition="python:card.get('type')=='Image'">
+              <div class="mb-3" tal:condition="python:card.get('type')=='Image'">
                 <img tal:condition="card/imageurl" class="img-fluid" tal:attributes="src card/imageurl"/>
               </div>
             </div>
-
           </div>
 
-          <div tal:condition="view/getFolderCards" class="col-sm-9 col-xs-12">    
-            <div tal:repeat="cards view/cardlist" style="margin-bottom:20px" class="card-deck">
-              <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 18rem;">
-                  <a tal:condition="item/topimage" href="" class="card-link" tal:attributes="href item/url">
-                    <img src="" alt="" class="card-img-top" tal:replace="structure item/topimage"/>
+
+          <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">    
+            <div class="card-columns mb-3">
+              <div tal:repeat="item batch" class="card bg-light mb-3">
+                  <a href="" class="card-link" tal:attributes="href item/url">
+                    <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
+                    <div class="card-body">
+                      <h6 class=""><strong tal:content="item/title"/></h6>
+                      <p class="card-text">
+                        <span class="description" tal:content="item/description"/>
+                      </p>
+                    </div>
                   </a>
-                  <div class="card-body">
-                    <h6 class=""><strong tal:content="item/title"/></h6>
-                    <p class="card-text">
-                      <span class="description" tal:content="item/description"/>
-                    </p>
-                  </div>
-                  <div class="card-footer bg-light border-dark">
-                    <a href="" class="card-link" tal:attributes="href item/url">Weiter</a>
-                  </div>
               </div>
             </div>
           </div>
 
+        </div>
 
-          <div tal:condition="not:view/getFolderCards" class="col-sm-12 col-xs-12">    
-            <div tal:repeat="cards view/cardlist" style="margin-bottom:20px" class="card-deck">
-
-              <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 18rem;">
-                  <a tal:condition="item/topimage" href="" class="card-link" tal:attributes="href item/url">
-                    <img src="" alt="" class="card-img-top" tal:replace="structure item/topimage"/>
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title" tal:content="item/title"></h5>
-                    <p class="card-text">
-                      <span class="description" tal:content="item/description"/>
-                    </p>
-                  </div>
-                  <div class="card-footer bg-light border-dark">
-                    <a href="" class="card-link" tal:attributes="href item/url">Weiter</a>
-                  </div>
-              </div>
-            </div>
-          </div>
-
+        <div class="row" tal:condition="view/endhtml">
+          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
         </div>
 
         <div class="row">
           <span class="row" tal:content="structure provider:plone.belowcontentbody" />
         </div>
+
+        <tal:batchnavigation
+             define="batchnavigation nocall:context/@@batchnavigation"
+             replace="structure python:batchnavigation(batch)" />
 
       </div>
 

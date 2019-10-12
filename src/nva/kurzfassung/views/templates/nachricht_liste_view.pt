@@ -10,36 +10,37 @@
     <tal:main-macro metal:define-macro="main">
 
       <div tal:define="results view/contentlist;
+           batchvalue view/batchvalue;
            Batch python:modules['plone.batching'].Batch;
-           b_size python:5;b_start python:0;b_start request/b_start | b_start;
+           b_size python:batchvalue;b_start python:0;b_start request/b_start | b_start;
            batch python:Batch(results, b_size, int(b_start), orphan=0);">
 
         <div class="row">
-          <span class="col-sm12 col-xs-12" tal:content="structure provider:plone.abovecontenttitle" />
+          <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
 
         <div class="row">
-          <h1 class="col-sm-12 col-xs-12" tal:content="view/mytitle"/>
+          <h1 class="col-sm-12 col-12" tal:content="view/mytitle"/>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.belowcontenttitle" />
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.belowcontenttitle" />
         </div>
 
         <div class="row" tal:condition="view/mydesc">
-          <div id="parent-fieldname-description" class="col-sm-12 col-xs-12 documentDescription" tal:content="view/mydesc"/>
+          <div id="parent-fieldname-description" class="col-sm-12 col-12 documentDescription" tal:content="view/mydesc"/>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.abovecontentbody" />
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.abovecontentbody" />
         </div>
 
         <div class="row" tal:condition="view/myhtml">
-          <div class="col-sm-12 col-xs-12" tal:content="structure view/myhtml"/>
+          <div class="col-sm-12 col-12" tal:content="structure view/myhtml"/>
         </div>
 
-        <div style="margin-top:20px; margin-bottom:20px" class="row">
-          <div class="col-xs-12 col-sm-12">
+        <div class="row mb-3 mt-3">
+          <div class="col-12 col-sm-12">
             <div class="btn-group" role="group">
              <a class="btn btn-success btn-lg" href="#" role="button">Aktuelle Nachrichten</a>
              <a class="btn btn-secondary btn-lg" href="#" tal:attributes="href view/archivlink" role="button">Nachrichtenarchiv</a>
@@ -52,7 +53,7 @@
         <div class="row" tal:repeat="item results">
           <hr class="media-default"/>
           <a href="#" tal:attributes="href item/url">
-            <div class="col-sm-12 col-xs-12">
+            <div class="col-sm-12 col-12">
               <h3 class="newsDescription" tal:content="item/title">
                 Title
               </h3>
@@ -66,9 +67,17 @@
           </a>
         </div>
 
+        <div class="row" tal:condition="view/endhtml">
+          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+        </div>
+
         <div class="row">
           <span class="row" tal:content="structure provider:plone.belowcontentbody" />
         </div>
+
+        <tal:batchnavigation
+             define="batchnavigation nocall:context/@@batchnavigation"
+             replace="structure python:batchnavigation(batch)" />
 
       </div>
 

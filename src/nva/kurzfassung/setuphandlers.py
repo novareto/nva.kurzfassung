@@ -28,6 +28,8 @@ def post_install(context):
         viewlist = viewlist + ('enhanced_folderlist',)
     if 'enhanced_cardview' not in viewlist:
         viewlist = viewlist + ('enhanced_cardview',)
+    if 'enhanced_cardcolumns' not in viewlist:
+        viewlist = viewlist + ('enhanced_cardcolumns',)
     if 'nachricht_view' not in viewlist:
         viewlist = viewlist + ('nachricht_view',)
     if 'small_nachricht_view' not in viewlist:
@@ -52,12 +54,8 @@ def post_install(context):
         viewlist = viewlist + ('enhanced_folderlist',)
     if 'enhanced_cardview' not in viewlist:
         viewlist = viewlist + ('enhanced_cardview',)
-    if 'nachricht_view' not in viewlist:
-        viewlist = viewlist + ('nachricht_view',)
-    if 'small_nachricht_view' not in viewlist:
-        viewlist = viewlist + ('small_nachricht_view',)
-    if 'nachricht_liste_view' not in viewlist:
-        viewlist = viewlist + ('nachricht_liste_view',)
+    if 'enhanced_cardcolumns' not in viewlist:
+        viewlist = viewlist + ('enhanced_cardcolumns',)
     if 'enhanced_contentdir' not in viewlist:
         viewlist = viewlist + ('enhanced_contentdir',)
     if 'enhanced_tableview' not in viewlist:

@@ -15,3 +15,6 @@ class ErweiterteKartenansicht(ErweiterteKurzfassung):
                 size = self.context.columns
         artikel = self.contentlist()
         return [artikel[i:i+size] for i in range(0, len(artikel), size)]
+
+class ErweiterteKartenspalten(ErweiterteKurzfassung):
+    """Content-Liste wird von der erweiterten Kurzfassung geerbt."""
