@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 from zope.interface import Interface
 from nva.kurzfassung import _
 from Products.Five.browser import BrowserView
@@ -110,7 +111,7 @@ class ErweiterteKurzfassung(BrowserView):
         return excludeFromDisplay
 
 
-    def getSchmuckbild(self, imagetag, obj):
+    def getSchmuckbild(self, obj):
         """
         Gibt ein Schmuckbild zurueck, wenn vorhanden
         """
@@ -118,11 +119,11 @@ class ErweiterteKurzfassung(BrowserView):
             contentid = selectSchmuckbilder(self.context).getTerm(obj.schmuckbild).token
             brain = api.content.find(portal_type='Image', UID=contentid)[0]
             imgobj = brain.getObject()
-            imgurl = '%s/@@images/image/large' %imgobj.absolute_url()
+            imgurl = '%s/@@images/image' %imgobj.absolute_url()
             imgtitle = brain.Description
-            image = imagetag %(imgurl, imgtitle)
+            image = (imgurl, imgtitle)
         except:
-            image = ''
+            image = ()
         return image
 
 
@@ -130,58 +131,58 @@ class ErweiterteKurzfassung(BrowserView):
         """
         Formatiert ein Vorschaubild fuer die Ordneransichten
         """
-        image = ''
-        imagetag = '<img src="%s" title="%s" class="img-fluid">'
-        imgtitle = obj.title
+        img = {}
+        img['title'] = obj.title
+        img['description'] = obj.description
+        img['url'] = ''
         if hasattr(obj, 'alttitle'):
             if obj.alttitle:
-                imgtitle = obj.alttitle
+                img['title'] = obj.alttitle
         if hasattr(obj, 'image'):
             if obj.image:
-                imgurl = '%s/@@images/image/large' %obj.absolute_url()
-                image = imagetag %(imgurl, imgtitle)
-                return image
+                img['url'] = '%s/@@images/image' %obj.absolute_url()
+                return img
         if hasattr(obj, 'bild'):
             if obj.bild:
-                imgurl = '%s/@@images/bild/large' %obj.absolute_url()
-                image = imagetag %(imgurl, imgtitle)
-                return image
+                img['url'] = '%s/@@images/bild' %obj.absolute_url()
+                return img
         if hasattr(obj, 'portraet'):
             if obj.portraet:
-                imgurl = '%s/@@images/portraet/large' %obj.absolute_url()
-                image = imagetag %(imgurl, imgtitle)
-                return image
+                img['url'] = '%s/@@images/portraet' %obj.absolute_url()
+                return img
         if hasattr(obj, 'schmuckbild'):
             if obj.schmuckbild:
-                image = self.getSchmuckbild(imagetag, obj)
-                return image 
+                schmuck = self.getSchmuckbild(obj)
+                if schmuck:
+                    img['url'] = image[0]
+                    img['description'] = image[1]
+                    return img
         if hasattr(obj, 'poster'):
             if obj.poster:
-                imgurl = '%s/@@images/poster/large' %obj.absolute_url()
-                image = imagetag %(imgurl,imgtitle)
-                return image
+                img['url'] = '%s/@@images/poster' %obj.absolute_url()
+                return img
         if hasattr(obj, 'newsimage'):
             if obj.newsimage:
                 if obj.newsimage.to_object:
-                    imgurl = '%s/@@images/image/large' % obj.newsimage.to_object.absolute_url()
-                    imgtitle = obj.newsimage.to_object.title
-                    image = imagetag %(imgurl, obj.newsimage.to_object.title)
-                    return image
+                    img['url'] = '%s/@@images/image' % obj.newsimage.to_object.absolute_url()
+                    img['title'] = obj.newsimage.to_object.title
+                    img['description'] = obj.newsimage.to_object.description
+                    return img
         if hasattr(obj, 'titleimage'):
             if obj.titleimage:
-                imgurl = '%s/@@images/titleimage/mini' % obj.absolute_url()
-                image = imagetag %(imgurl, imgtitle)
-                return image
+                img['url'] = '%s/@@images/titleimage' % obj.absolute_url()
+                return img
         if hasattr(obj, 'titleimages'):
             if obj.titleimages:
                 if obj.titleimages[0].to_object:
-                    imgurl = '%s/@@images/image/large' % obj.titleimages[0].to_object.absolute_url()
-                    imgtitle = obj.titleimages[0].to_object.description
-                    image = imagetag %(imgurl, imgtitle)
-                    return image
-        if not image and obj.portal_type == "News Item":
-            image = getDefault()
-        return image
+                    img['url'] = '%s/@@images/image' % obj.titleimages[0].to_object.absolute_url()
+                    img['title'] = obj.titleimages[0].to_object.title
+                    img['description'] = obj.titleimages[0].to_object.description
+                    return img
+        if not img['url'] and obj.portal_type == "News Item":
+            img = getDefault()
+            return img
+        return {}
 
 
     def formatVideo(self, obj):
@@ -210,12 +211,12 @@ class ErweiterteKurzfassung(BrowserView):
                 if contextobj.portal_type in ['Document', 'News Item']:
                     if contextobj.text:
                         entry['text'] = contextobj.text.output
-                entry['imageurl'] = ''
-                if contextobj.portal_type in ['Image']:
-                    if contextobj.image:
-                        entry['imageurl'] = '%s/@@images/image/preview' % contextobj.absolute_url()
+                previewimage = self.formatPreviewImage(contextobj)        
+                entry['imageurl'] = previewimage.get('url')
+                entry['imagetitle'] = previewimage.get('title')
+                entry['imagedesc'] = previewimage.get('description')
                 cardlist.append(entry)
-        return cardlist 
+        return cardlist
                 
 
     def formatcontent(self):
@@ -245,12 +246,36 @@ class ErweiterteKurzfassung(BrowserView):
             if obj.portal_type == 'Link':
                 entry['url'] = self.formatLink(obj)
             entry['excludeFromDisplay'] = self.excludeFromDisplay(obj)
-            entry['image'] = self.formatPreviewImage(obj)
+            entry['image'] = ''
+            entry['smallimg'] = ''
+            entry['topimage'] = ''
+            img = self.formatPreviewImage(obj)
+            if img:
+                imgtag = '<img src="%s" class="%s" title="%s" alt="%s">'
+                large = img['url'] + '/large'
+                imgclass = 'img-fluid'
+                entry['image'] = imgtag % (large, imgclass, img['title'], img['description'])
+                small = img['url'] + '/mini'
+                imgclass = 'align-self-center mr-3'
+                entry['smallimg'] = imgtag % (small, imgclass, img['title'], img['description'])
+                top = img['url']
+                imgclass = 'img-fluid img-top'
+                entry['topimage'] = imgtag % (top, imgclass, img['title'], img['description'])
             entry['video'] = self.formatVideo(obj)
             if not self.excludeFromDisplay(obj):
                 contents.append(entry)
             entry['cards'] = self.getContextCards(obj)
         return contents
+
+
+    def getBatchValue(self):
+        default = 10000
+        if hasattr(self.context, 'batchvalue'):
+            if self.context.batchvalue == 0:
+                return default
+            else:
+                return self.context.batchvalue
+        return default
 
 
     def contentlist(self):
@@ -261,4 +286,6 @@ class ErweiterteKurzfassung(BrowserView):
             if self.context.text:
                 self.myhtml = self.context.text.output
         self.emptymessage = self.leermeldung()
+        self.mastercards = self.getContextCards(self.context)
+        self.batchvalue = self.getBatchValue()
         return self.formatcontent()

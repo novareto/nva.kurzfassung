@@ -9,7 +9,7 @@
   <include package="plone.app.contentmenu" />
 
   <browser:page
-     name="enhanced_tableview"
+     name="*"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".erweiterte_tabelle.ErweiterteTabelle"
      template="templates/enhanced_tableview.pt"
@@ -18,7 +18,7 @@
 
   <browser:page
      name="enhanced_contentdir"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".erweitertes_inhaltsverzeichnis.ErweitertesInhaltsverzeichnis"
      template="templates/enhanced_contentdir.pt"
      permission="zope2.View"
@@ -26,7 +26,7 @@
 
   <browser:page
      name="archiv_nachricht_liste_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".nachrichten_archiv_liste.NachrichtenArchivListe"
      template="templates/archiv_nachricht_liste_view.pt"
      permission="zope2.View"
@@ -34,7 +34,7 @@
 
   <browser:page
      name="nachricht_liste_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".nachrichten_liste.NachrichtenListe"
      template="templates/nachricht_liste_view.pt"
      permission="zope2.View"
@@ -42,7 +42,7 @@
 
   <browser:page
      name="small_archiv_nachricht_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".kleine_nachrichten_archiv_ansicht.KleineNachrichtenArchivAnsicht"
      template="templates/small_archiv_nachricht_view.pt"
      permission="zope2.View"
@@ -50,7 +50,7 @@
 
   <browser:page
      name="small_nachricht_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".kleine_nachrichten_ansicht.KleineNachrichtenAnsicht"
      template="templates/small_nachricht_view.pt"
      permission="zope2.View"
@@ -58,7 +58,7 @@
 
   <browser:page
      name="archiv_nachricht_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".nachrichten_archiv_ansicht.NachrichtenArchivAnsicht"
      template="templates/archiv_nachricht_view.pt"
      permission="zope2.View"
@@ -66,7 +66,7 @@
 
   <browser:page
      name="nachricht_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".nachrichten_ansicht.NachrichtenAnsicht"
      template="templates/nachricht_view.pt"
      permission="zope2.View"
@@ -74,7 +74,7 @@
 
   <browser:page
      name="enhanced_cardview"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".erweiterte_kartenansicht.ErweiterteKartenansicht"
      template="templates/enhanced_cardview.pt"
      permission="zope2.View"
@@ -82,7 +82,7 @@
 
   <browser:page
      name="enhanced_folderlist"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".erweiterte_ordnerliste.ErweiterteOrdnerliste"
      template="templates/enhanced_folderlist.pt"
      permission="zope2.View"
@@ -98,9 +98,17 @@
 
   <browser:page
      name="zwei_spalten_view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     for="*"
      class=".zwei_spalten_ansicht.ZweiSpaltenAnsicht"
      template="templates/zwei_spalten_view.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     name="zwei_spalten_context_view"
+     for="*"
+     class=".zwei_spalten_ansicht.ZweiSpaltenContext"
+     template="templates/zwei_spalten_context_view.pt"
      permission="zope2.View"
      />
 
@@ -150,6 +158,11 @@
      <browser:menuItem
        title="Zwei Spalten Ansicht"
        action="zwei_spalten_view"
+       description="Zwei Spalten Ansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Karten zum Inhalt"
+       action="zwei_spalten_context_view"
        description="Zwei Spalten Ansicht fuer Plone"
      />
   </browser:menuItems>

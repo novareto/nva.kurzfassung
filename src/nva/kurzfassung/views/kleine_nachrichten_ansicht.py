@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from nva.kurzfassung import _
 from nva.kurzfassung.views.nachrichten_ansicht import NachrichtenAnsicht
 from Products.Five.browser import BrowserView
-
 
 class KleineNachrichtenAnsicht(NachrichtenAnsicht):
     """ Erbt von der Nachrichten Ansicht """

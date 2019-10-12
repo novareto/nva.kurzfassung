@@ -40,6 +40,8 @@ def post_install(context):
         viewlist = viewlist + ('enhanced_tableview',)
     if 'zwei_spalten_view' not in viewlist:
         viewlist = viewlist + ('zwei_spalten_view',)
+    if 'zwei_spalten_context_view' not in viewlist:
+        viewlist = viewlist + ('zwei_spalten_context_view',)
     typefolder.manage_changeProperties(view_methods = viewlist)
 
     typecollection = typesTool['Collection']
@@ -62,6 +64,8 @@ def post_install(context):
         viewlist = viewlist + ('enhanced_tableview',)
     if 'zwei_spalten_view' not in viewlist:
         viewlist = viewlist + ('zwei_spalten_view',)
+    if 'zwei_spalten_context_view' not in viewlist:
+        viewlist = viewlist + ('zwei_spalten_context_view',)
     typecollection.manage_changeProperties(view_methods = viewlist)
 
 

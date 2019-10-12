@@ -6,3 +6,6 @@ from Products.Five.browser import BrowserView
 
 class ZweiSpaltenAnsicht(ErweiterteKurzfassung):
     """Erbt von der erweiterten Kurzfassung"""
+
+class ZweiSpaltenContext(ErweiterteKurzfassung):
+    """Erbt von der erweiterten Kurzfassung"""

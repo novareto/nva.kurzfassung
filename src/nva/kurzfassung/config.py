@@ -18,12 +18,11 @@ def getDefault():
                 defaults = obj.getFolderContents()
                 for i in defaults:
                     if i.portal_type == 'Image':
-                        imgtag = '<img src="%s/@@images/image/mini" title="%s" class="media-object img-responsive">' %(i.getURL(), i.Title)
-                        images.append(imgtag)
+                        images.append({'url':i.getURL(), 'title':i.Title})
     to = len(images)
     if to == 1:
         return images[0]
     if to > 1:
         imageindex = random.randint(0, to-1)
         return images[imageindex]
-    return ''
+    return {}
