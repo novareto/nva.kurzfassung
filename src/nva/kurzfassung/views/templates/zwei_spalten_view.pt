@@ -68,7 +68,7 @@
         </div>
 
         <div class="row">
-          <span class="row" tal:content="structure provider:plone.belowcontentbody" />
+          <span class="col-12" tal:content="structure provider:plone.belowcontentbody" />
         </div>
 
 	<tal:batchnavigation
