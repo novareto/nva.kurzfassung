@@ -282,9 +282,13 @@ class ErweiterteKurzfassung(BrowserView):
         self.mytitle = self.context.Title()
         self.mydesc = self.context.Description()
         self.myhtml = ''
+        self.endhtml = ''
         if hasattr(self.context, 'text'):
             if self.context.text:
                 self.myhtml = self.context.text.output
+        if hasattr(self.context, 'schlusstext'):
+            if self.context.schlusstext:
+                self.endhtml = self.context.schlusstext.output
         self.emptymessage = self.leermeldung()
         self.mastercards = self.getContextCards(self.context)
         self.batchvalue = self.getBatchValue()

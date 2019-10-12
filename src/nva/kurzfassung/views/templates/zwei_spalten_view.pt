@@ -63,13 +63,17 @@
           </div>
         </div>
 
-	<tal:batchnavigation
-             define="batchnavigation nocall:context/@@batchnavigation"
-             replace="structure python:batchnavigation(batch)" />
+        <div class="row" tal:condition="view/endhtml">
+          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+        </div>
 
         <div class="row">
           <span class="row" tal:content="structure provider:plone.belowcontentbody" />
         </div>
+
+	<tal:batchnavigation
+             define="batchnavigation nocall:context/@@batchnavigation"
+             replace="structure python:batchnavigation(batch)" />
 
       </div>
 

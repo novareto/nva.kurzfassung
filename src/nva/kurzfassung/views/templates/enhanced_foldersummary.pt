@@ -11,47 +11,47 @@
     <tal:main-macro metal:define-macro="main">
 
       <div tal:define="results view/contentlist;
+           batchvalue view/batchvalue;
            Batch python:modules['plone.batching'].Batch;
-           b_size python:5;b_start python:0;b_start request/b_start | b_start;
+           b_size python:batchvalue;b_start python:0;b_start request/b_start | b_start;
            batch python:Batch(results, b_size, int(b_start), orphan=0);">
 
-
         <div class="row">
-          <span class="col-sm12 col-xs-12" tal:content="structure provider:plone.abovecontenttitle" />
+          <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
 
         <div class="row">
-          <h1 class="col-sm-12 col-xs-12" tal:content="view/mytitle"/>
+          <h1 class="col-sm-12 col-12" tal:content="view/mytitle"/>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.belowcontenttitle" />
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.belowcontenttitle" />
         </div>
 
         <div class="row" tal:condition="view/mydesc">
-          <div id="parent-fieldname-description" class="col-sm-12 col-xs-12 documentDescription" tal:content="view/mydesc"/>
+          <div id="parent-fieldname-description" class="col-sm-12 col-12 documentDescription" tal:content="view/mydesc"/>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:content="structure provider:plone.abovecontentbody" />
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.abovecontentbody" />
         </div>
 
         <div class="row" tal:condition="view/myhtml">
-          <div class="col-sm-12 col-xs-12" tal:content="structure view/myhtml"/>
+          <div class="col-sm-12 col-12" tal:content="structure view/myhtml"/>
         </div>
 
         <div class="row">
-          <span class="col-sm-12 col-xs-12" tal:condition="not:results" tal:content="view/emptymessage"/>
+          <span class="col-sm-12 col-12" tal:condition="not:results" tal:content="view/emptymessage"/>
         </div>
 
-        <div class="row" tal:repeat="item results">
+        <div class="row" tal:repeat="item batch">
 
-          <div style="margin-bottom:20px;" tal:condition="not:item/video" class="col-xs-12 col-sm-12">
-            <hr style="margin-bottom:20px;" class="media-default"/>
+          <div tal:condition="not:item/video" class="col-12 col-sm-12 mb-3">
+            <hr class="media-default mb-3"/>
             <a href="#" tal:attributes="href item/url">
             
               <div class="row">
-                <div class="col-sm-12 col-xs-12">
+                <div class="col-sm-12 col-12">
                   <h3 class="newsDescription" tal:content="item/title">
                     Title
                   </h3>
@@ -59,11 +59,11 @@
               </div>
 
               <div class="row">
-                <div tal:condition="item/image" class="col-sm-5 col-xs-7">
-                  <img src="" alt="" class="media-object img-responsive" tal:replace="structure item/image"/>
+                <div tal:condition="item/image" class="col-sm-5 col-7">
+                  <img src="" alt="" class="media-object img-fluid" tal:replace="structure item/image"/>
                 </div>
 
-                <div tal:condition="item/image" class="col-sm-7 col-xs-12">
+                <div tal:condition="item/image" class="col-sm-7 col-12">
                   <p class="tileBody">
                     <span class="description" tal:content="item/description">
                       description
@@ -71,7 +71,7 @@
                   </p>
                 </div>
 
-                <div tal:condition="not:item/image" class="col-sm-12 col-xs-12">
+                <div tal:condition="not:item/image" class="col-sm-12 col-12">
                   <p class="tileBody">
                     <span class="description" tal:content="item/description">
                       description
@@ -82,24 +82,24 @@
             </a>
           </div>
 
-          <div style="margin-bottom:20px;" tal:condition="item/video" tal:define="video item/video" class="col-xs-12 col-sm-12">
-            <hr style="margin-bottom:20px;" class="media-default">
+          <div tal:condition="item/video" tal:define="video item/video" class="col-12 col-sm-12 mb-3">
+            <hr class="media-default mb-3">
 
             <div class="row">
-              <div class="col-sm-12 col-xs-12">
-                <h3 class="newsDescription" style="color:#004994;" tal:content="item/title">
+              <div class="col-sm-12 col-12">
+                <h3 class="newsDescription" tal:content="item/title">
                   Title
                 </h3>
               </div>
             </div>
 
             <div class="row">
-              <div tal:condition="video/embed" class="col-sm-5 col-xs-12">
+              <div tal:condition="video/embed" class="col-sm-5 col-12">
                 <div class="" tal:attributes="class video/videoformat">
                   <span tal:replace="structure video/embed"/>
                 </div>
               </div>
-              <div tal:condition="video/src" class="col-sm-5 col-xs-12">
+              <div tal:condition="video/src" class="col-sm-5 col-12">
                 <div class="video-wrapper">
                   <video width="640" height="360" style="width: 100%; height: 100%;" controls>
                     <source type="video/youtube" tal:attributes="src video/src;type video/videotype"/>
@@ -107,7 +107,7 @@
                 </div>
               </div>
               <a href="#" tal:attributes="href item/url">
-                <div class="col-sm-7 col-xs-12">
+                <div class="col-sm-7 col-12">
                   <p class="tileBody">
                     <span class="description" tal:content="item/description"/>
                   </p>
@@ -119,9 +119,17 @@
 
         </div>
 
+        <div class="row" tal:condition="view/endhtml">
+          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+        </div>
+
         <div class="row">
           <span class="row" tal:content="structure provider:plone.belowcontentbody" />
         </div>
+
+        <tal:batchnavigation
+             define="batchnavigation nocall:context/@@batchnavigation"
+             replace="structure python:batchnavigation(batch)" />
 
       </div>
 
