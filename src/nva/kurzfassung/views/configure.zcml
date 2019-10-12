@@ -9,8 +9,8 @@
   <include package="plone.app.contentmenu" />
 
   <browser:page
-     name="*"
-     for="Products.CMFCore.interfaces.IFolderish"
+     name="enhanced_tableview"
+     for="*"
      class=".erweiterte_tabelle.ErweiterteTabelle"
      template="templates/enhanced_tableview.pt"
      permission="zope2.View"
