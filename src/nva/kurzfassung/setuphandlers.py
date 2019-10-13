@@ -44,6 +44,8 @@ def post_install(context):
         viewlist = viewlist + ('zwei_spalten_view',)
     if 'zwei_spalten_context_view' not in viewlist:
         viewlist = viewlist + ('zwei_spalten_context_view',)
+    if 'akkordeon_view' not in viewlist:
+        viewlist = viewlist + ('akkordeon_view',)        
     typefolder.manage_changeProperties(view_methods = viewlist)
 
     typecollection = typesTool['Collection']
@@ -64,6 +66,8 @@ def post_install(context):
         viewlist = viewlist + ('zwei_spalten_view',)
     if 'zwei_spalten_context_view' not in viewlist:
         viewlist = viewlist + ('zwei_spalten_context_view',)
+    if 'akkordeon_view' not in viewlist:
+        viewlist = viewlist + ('akkordeon_view',)        
     typecollection.manage_changeProperties(view_methods = viewlist)
 
 

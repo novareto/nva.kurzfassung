@@ -35,15 +35,18 @@ class ErweiterteKurzfassung(BrowserView):
     """Erweiterte Kurzfassung"""
 
 
-    @property
-    def query(self):
+    def query(self, obj=None):
         """
         Listing der Ordnerinhalte oder Ergebnisse der Kollektion
         """
-        if ICollection.providedBy(self.context):
-            return self.context.queryCatalog(batch=False)
-        elif IFolderish.providedBy(self.context):
-            return self.context.getFolderContents(batch=False)
+        if obj:
+            query_context = obj
+        else:
+            query_context = self.context
+        if ICollection.providedBy(query_context):
+            return query_context.queryCatalog(batch=False)
+        elif IFolderish.providedBy(query_context):
+            return query_context.getFolderContents(batch=False)
 
 
     def createVideoentry(self, obj):
@@ -224,10 +227,12 @@ class ErweiterteKurzfassung(BrowserView):
         Formatiert die Ordnerinhalte
         """
         contents = []
-        for i in self.query:
+        index = 0
+        for i in self.query():
             entry = {}
             obj = i.getObject()
             entry['title'] = obj.title
+            entry['index'] = index
             entry['description'] = obj.description
             if obj.portal_type == 'LDAPPerson':
                 entry['description'] = self.formatPerson(obj)
@@ -262,9 +267,10 @@ class ErweiterteKurzfassung(BrowserView):
                 imgclass = 'img-fluid img-top'
                 entry['topimage'] = imgtag % (top, imgclass, img['title'], img['description'])
             entry['video'] = self.formatVideo(obj)
+            entry['cards'] = self.getContextCards(obj)
             if not self.excludeFromDisplay(obj):
                 contents.append(entry)
-            entry['cards'] = self.getContextCards(obj)
+                index +=1
         return contents
 
 

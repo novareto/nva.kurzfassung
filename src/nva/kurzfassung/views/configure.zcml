@@ -120,6 +120,14 @@
      permission="zope2.View"
      />
 
+  <browser:page
+     name="akkordeon_view"
+     for="*"
+     class=".akkordeon_ansicht.AkkordeonAnsicht"
+     template="templates/akkordeon_view.pt"
+     permission="zope2.View"
+     />
+
   <browser:menuItems
      for="*"
      menu="plone_displayviews">
@@ -139,9 +147,14 @@
        description="Kartenansicht fuer Plone"
      />
      <browser:menuItem
+       title="Akkordeon Ansicht"
+       action="akkordeon_view"
+       description="Akkordeon Ansicht fuer Plone"
+     />
+     <browser:menuItem
        title="Spalten mit Karten"
        action="enhanced_cardcolumns"
-       description="Kartenansicht fuer Plone"
+       description="Karten mit Spalten fuer Plone"
      />
      <browser:menuItem
        title="Inhaltsverzeichnis"

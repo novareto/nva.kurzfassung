@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="example.conference">
+<body>
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+      <div tal:define="results view/contentlist;
+           batchvalue view/batchvalue;
+           Batch python:modules['plone.batching'].Batch;
+           b_size python:batchvalue;b_start python:0;b_start request/b_start | b_start;
+           batch python:Batch(results, b_size, int(b_start), orphan=0);">
+
+        <div class="row">
+          <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
+        </div>
+
+        <div class="row">
+          <h1 class="col-sm-12 col-12" tal:content="view/mytitle"/>
+        </div>
+
+        <div class="row">
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.belowcontenttitle" />
+        </div>
+
+        <div class="row" tal:condition="view/mydesc">
+          <div id="parent-fieldname-description" class="col-sm-12 col-12 documentDescription" tal:content="view/mydesc"/>
+        </div>
+
+        <div class="row">
+          <span class="col-sm-12 col-12" tal:content="structure provider:plone.abovecontentbody" />
+        </div>
+
+        <div class="row" tal:condition="view/myhtml">
+          <div class="col-sm-12 col-12" tal:content="structure view/myhtml"/>
+        </div>
+
+        <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
+
+        <div class="row" tal:condition="results">
+
+          <div class="col-sm-12 col-12">
+
+            <div class="accordion" id="accordeonAnsicht">
+              <div tal:repeat="item batch" class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" aria-expanded="true" 
+		            tal:attributes="data-target string:#collapse${item/index}; aria-controls string:collapse${item/index}"
+			    tal:content="item/title"></button>
+                  </h2>
+                </div>
+                <div class="collapse" aria-labelledby="headingOne" data-parent="#accordeonAnsicht" 
+		     tal:attributes="id string:collapse${item/index}">
+	          <div class="card-body" tal:content="structure item/text"> 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row" tal:condition="view/endhtml">
+          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+        </div>
+
+        <div class="row">
+          <span class="col-12" tal:content="structure provider:plone.belowcontentbody" />
+        </div>
+
+        <tal:batchnavigation
+             define="batchnavigation nocall:context/@@batchnavigation"
+             replace="structure python:batchnavigation(batch)" />
+
+      </div>
+
+    </tal:main-macro>
+</metal:main>
+</body>
+</html>
