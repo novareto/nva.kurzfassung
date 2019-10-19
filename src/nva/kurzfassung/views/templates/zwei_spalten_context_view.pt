@@ -49,16 +49,14 @@
 
                 <div class="col-sm-8 col-12"><!--linke Spalte-->
 
-	          <a tal:attributes="href item/url">
                   <div class="media">
                       <img tal:condition="item/smallimg" tal:replace="structure item/smallimg">
                       <div class="media-body">
                         <h4 tal:content="item/title" class="mt-0"></h4>
-                        <p tal:content="item/description"></p>
-                        <p class="mb-0"></p>
+                        <p class="documentDescription" tal:content="item/description"></p>
+                        <p class="mb-0" tal:replace="structure item/text"></p>
                       </div>
                   </div>
-		  </a>
 
                 </div><!--Ende linke Spalte-->
                 

@@ -138,6 +138,19 @@ class ErweiterteKurzfassung(BrowserView):
         img['title'] = obj.title
         img['description'] = obj.description
         img['url'] = ''
+        img['reference'] = '#'
+        img['reftitle'] = ''
+        if obj.relatedItems:
+            img['reference'] = obj.relatedItems[0].to_object.absolute_url()
+            img['reftitle'] = obj.relatedItems[0].to_object.title
+        if 'newsurl' in obj.__dict__:
+            if obj.newsurl:
+                img['reference'] = obj.newsurl.to_object.absolute_url()
+                img['reftitle'] = obj.newsurl.to_object.title
+        if 'extnews' in obj.__dict__:
+            if obj.extnews:
+                img['reference'] = obj.extnews
+                img['reftitle'] = obj.extnewstitle
         if hasattr(obj, 'alttitle'):
             if obj.alttitle:
                 img['title'] = obj.alttitle
@@ -198,6 +211,31 @@ class ErweiterteKurzfassung(BrowserView):
         
         return video
 
+    def formatCollection(self, contextobj):
+        weiter = False
+        objlist = self.query(contextobj)
+        if len(objlist) > 5:
+            objlist = objlist[:5]
+            weiter = True
+        html = u'<dl>'
+        for i in objlist:
+            obj = i.getObject()
+            definition = ''
+            html += u'<dt><a href="%s" title="%s">%s</a></dt>' % (obj.absolute_url(), obj.title, obj.title)
+            if obj.portal_type == "Event":
+                if obj.start:
+                    definition = '<i class="far fa-calendar-alt"></i> %s' % obj.start.strftime('%d.%m.%Y ')
+                if obj.location:
+                    definition += '<i class="fas fa-map-marker-alt"></i> %s' % obj.location
+            elif obj.portal_type == "News Item":
+                definition = "%s %s" (obj.modified.strftime("%d.%m.%Y"), obj.description)
+            else:
+                definition = obj.description
+            html += '<dd>%s</dd>' % definition
+            html += '</dl>'
+        if weiter:
+            html += '<a href="%s" title="%s">weiter</a>' % (contextobj.absolute_url(), contextobj.title)
+        return html    
 
     def getContextCards(self, obj):
         """
@@ -214,10 +252,17 @@ class ErweiterteKurzfassung(BrowserView):
                 if contextobj.portal_type in ['Document', 'News Item']:
                     if contextobj.text:
                         entry['text'] = contextobj.text.output
+                elif contextobj.portal_type in ['Collection']:
+                    entry['text'] = self.formatCollection(contextobj)
+                entry['cardclass'] = 'card border-primary mb-3'    
+                if hasattr(contextobj, 'cardcolor'):
+                    entry['cardclass'] = contextobj.cardcolor
                 previewimage = self.formatPreviewImage(contextobj)        
                 entry['imageurl'] = previewimage.get('url')
                 entry['imagetitle'] = previewimage.get('title')
                 entry['imagedesc'] = previewimage.get('description')
+                entry['reference'] = previewimage.get('reference')
+                entry['reftitle'] = previewimage.get('reftitle')
                 cardlist.append(entry)
         return cardlist
                 

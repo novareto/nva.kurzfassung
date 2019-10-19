@@ -51,7 +51,7 @@
                   <a href="" class="card-link" tal:attributes="href item/url">
                     <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
                     <div class="card-body">
-                      <h6 class=""><strong tal:content="item/title"/></h6>
+                      <h5 class=""><strong tal:content="item/title"/></h5>
                       <p class="card-text">
                         <span class="description" tal:content="item/description"/>
                       </p>
@@ -82,7 +82,7 @@
                   <a href="" class="card-link" tal:attributes="href item/url">
                     <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
                     <div class="card-body">
-                      <h6 class=""><strong tal:content="item/title"/></h6>
+                      <h5 class=""><strong tal:content="item/title"/></h5>
                       <p class="card-text">
                         <span class="description" tal:content="item/description"/>
                       </p>

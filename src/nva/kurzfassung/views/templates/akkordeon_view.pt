@@ -36,12 +36,13 @@
         </div>
 
         <div class="row" tal:condition="view/myhtml">
-          <div class="col-sm-12 col-12" tal:content="structure view/myhtml"/>
+          <div class="col-sm-10 col-12" tal:content="structure view/myhtml"/>
+          <div class="col-sm-2"></div>		
         </div>
 
         <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
 
-        <div class="row" tal:condition="results">
+        <div class="row mb-3" tal:condition="results">
 
           <div class="col-sm-12 col-12">
 

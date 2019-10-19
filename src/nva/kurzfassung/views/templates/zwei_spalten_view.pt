@@ -31,36 +31,45 @@
             <div tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
 
-            <div class="list-group">
-              <a tal:repeat="item batch" tal:attributes="href item/url" class="list-group-item list-group-item-action">
-                <div tal:condition="not: item/smallimg" class="d-flex w-100 justify-content-between">
-                  <h4 class="mb-1" tal:content="item/title"></h4>
-                </div>
-                <p tal:condition="not: item/smallimg" class="mb-1" tal:content="item/description"></p>
-		<div tal:condition="item/smallimg" class="media">
-		  <img tal:replace="structure item/smallimg">
-		  <div class="media-body">
-                    <h4 class="mt-0" tal:content="item/title"></h4>
-		    <span tal:content="item/description"/>
+		<div class="card mb-3" tal:repeat="item batch">
+		  <a class="edi-cardlink" tal:attributes="href item/url">	  
+		  <div class="row no-gutters">
+		    <div class="p-2 col-md-4">
+		      <img tal:replace="structure item/image">
+		    </div>
+		    <div class="col-md-8">
+		      <div class="card-body">
+			<h5 class="card-title" tal:content="item/title"></h5>
+			<p class="card-text" tal:content="item/description"></p>
+		      </div>
+		    </div>
 		  </div>
+		  </a>
 		</div>
-              </a>
-	    </div>
+
           </div>
 
 	  <div class="col-sm-4 col-12">
             <div tal:repeat="card view/mastercards">
-              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3">
+              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>
-		<img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
-                <div class="card-body text-primary" tal:content="structure card/text">
+		<a href="#" tal:attributes="href card/reference; title card/reftitle">
+		  <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
+		</a>
+                <div class="card-body" tal:content="structure card/text">
                 </div>
               </div>
               <div class="mb-3" tal:condition="python:card.get('type')=='Image'">
-                <img tal:condition="card/imageurl" class="img-fluid" tal:attributes="src card/imageurl"/>
+		<a href="#" tal:attributes="href card/reference; title card/reftitle">
+                  <img tal:condition="card/imageurl" class="rounded img-fluid" tal:attributes="src card/imageurl"/>
+		</a>  
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="row">
+          <span class="col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
         <div class="row" tal:condition="view/endhtml">

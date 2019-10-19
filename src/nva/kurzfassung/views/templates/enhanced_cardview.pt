@@ -47,11 +47,11 @@
 
           <div tal:condition="view/mastercards" class="col-sm-8 col-12">    
             <div tal:repeat="cards batch" class="card-deck mb-3">
-              <div tal:repeat="item cards" class="card bg-light mb-3">
+              <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 18rem;">
                   <a href="" class="card-link" tal:attributes="href item/url">
                     <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
                     <div class="card-body">
-                      <h6 class=""><strong tal:content="item/title"/></h6>
+	              <h5 class=""><strong tal:content="item/title"/></h5>
                       <p class="card-text">
                         <span class="description" tal:content="item/description"/>
                       </p>
@@ -63,7 +63,7 @@
 
 	  <div tal:condition="view/mastercards" class="col-sm-4 col-12">
             <div tal:repeat="card view/mastercards">
-              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3">
+              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>
                 <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
                 <div class="card-body" tal:content="structure card/text">
@@ -78,11 +78,11 @@
 
           <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">    
             <div tal:repeat="cards batch" class="card-deck mb-3">
-              <div tal:repeat="item cards" class="card bg-light mb-3">
+              <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 21rem;">
                   <a href="" class="card-link" tal:attributes="href item/url">
                     <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
                     <div class="card-body">
-                      <h6 class=""><strong tal:content="item/title"/></h6>
+                      <h5 class=""><strong tal:content="item/title"/></h5>
                       <p class="card-text">
                         <span class="description" tal:content="item/description"/>
                       </p>
