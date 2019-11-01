@@ -20,32 +20,16 @@
         </div>
 
         <div class="row">
-          <h1 class="col-sm-12 col-12" tal:content="view/mytitle"/>
-        </div>
 
-        <div class="row">
-          <span class="col-sm-12 col-12" tal:content="structure provider:plone.belowcontenttitle" />
-        </div>
+          <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
+            <h1 tal:content="view/mytitle"/>
+            <span tal:content="structure provider:plone.belowcontenttitle" />
+            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
+            <div tal:content="structure view/myhtml"/>
+            <span tal:condition="not:results" tal:content="view/emptymessage"/>
 
-        <div class="row" tal:condition="view/mydesc">
-          <div id="parent-fieldname-description" class="col-sm-12 col-12 documentDescription" tal:content="view/mydesc"/>
-        </div>
-
-        <div class="row">
-          <span class="col-sm-12 col-12" tal:content="structure provider:plone.abovecontentbody" />
-        </div>
-
-        <div class="row" tal:condition="view/myhtml">
-          <div class="col-sm-12 col-12" tal:content="structure view/myhtml"/>
-        </div>
-
-        <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
-
-        <div class="row" tal:condition="results">
-
-          <div class="col-sm-12 col-12">
-
-            <table class="table table-bordered">
+            <table tal:condition="results" class="table table-bordered">
               <thead>
                 <th>Titel</th>
                 <th>Beschreibung</th>
@@ -57,13 +41,64 @@
                 </tr>
               </tbody>
             </table>
+          </div>
 
+          <div tal:condition="view/mastercards" class="col-sm-8 col-12">
+            <h1 tal:content="view/mytitle"/>
+            <span tal:content="structure provider:plone.belowcontenttitle" />
+            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
+            <div tal:content="structure view/myhtml"/>
+            <span tal:condition="not:results" tal:content="view/emptymessage"/>
+
+            <table tal:condition="results" class="table table-bordered">
+              <thead>
+                <th>Titel</th>
+                <th>Beschreibung</th>
+              </thead>
+              <tbody>
+                <tr tal:repeat="item batch">
+                  <td><a href="" tal:attributes="href item/url" tal:content="item/title"/></td>
+                  <td tal:content="item/description"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+            <div tal:repeat="card view/mastercards">
+              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
+                <div class="card-header" tal:content="card/title">Header</div>
+                <a href="#" tal:attributes="href card/reference; title card/reftitle">
+                  <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
+                </a>
+                <div class="card-body" tal:content="structure card/text">
+                </div>
+              </div>
+              <div class="mb-3" tal:condition="python:card.get('type')=='Image'">
+                <a href="#" tal:attributes="href card/reference; title card/reftitle">
+                  <img tal:condition="card/imageurl" class="rounded img-fluid" tal:attributes="src card/imageurl"/>
+                </a>  
+              </div>
+            </div>
           </div>
 
         </div>
 
-        <div class="row" tal:condition="view/endhtml">
-          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+        <div tal:condition="not: view/mastercards" class="row">
+          <span class="col-12" tal:content="structure provider:nva.contentcards" />
+        </div>
+
+        <div tal:condition="not: view/mastercards" class="row" tal:condition="view/endhtml">
+          <div class="col-12" tal:content="structure view/endhtml"/>
+        </div>
+
+        <div tal:condition="view/mastercards" class="row">
+          <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
+        </div>
+
+        <div tal:condition="view/mastercards" class="row" tal:condition="view/endhtml">
+          <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
         </div>
 
         <div class="row">

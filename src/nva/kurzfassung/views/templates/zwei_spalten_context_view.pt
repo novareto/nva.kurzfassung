@@ -58,6 +58,17 @@
                       </div>
                   </div>
 
+                  <div tal:condition="item/content-cards"> 
+		    <hr>
+		    <div tal:repeat="cards item/content-cards" class="card-deck mb-3">
+		      <div tal:repeat="card cards" class="card border-primary mb-3" style="max-width: 18rem;">
+		        <div class="card-header" tal:content="card/title">Header</div>
+		        <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
+		        <div tal:condition="python:card.get('type')!='Image'" class="card-body" tal:content="structure card/text"></div>
+		      </div>
+		    </div>
+		  </div>
+
                 </div><!--Ende linke Spalte-->
                 
                 <div class="col-sm-4 col-12"><!--rechte Spalte-->
@@ -78,8 +89,12 @@
 
         </div><!--Items-->
 
+	<div class="row">
+          <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
+        </div>
+
         <div class="row" tal:condition="view/endhtml">
-          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+          <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
         </div>
 
         <div class="row">

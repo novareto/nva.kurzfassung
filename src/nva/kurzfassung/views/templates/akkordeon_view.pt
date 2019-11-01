@@ -19,33 +19,15 @@
           <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
 
-        <div class="row">
-          <h1 class="col-sm-12 col-12" tal:content="view/mytitle"/>
-        </div>
+        <div class="row mb-3">
 
-        <div class="row">
-          <span class="col-sm-12 col-12" tal:content="structure provider:plone.belowcontenttitle" />
-        </div>
-
-        <div class="row" tal:condition="view/mydesc">
-          <div id="parent-fieldname-description" class="col-sm-12 col-12 documentDescription" tal:content="view/mydesc"/>
-        </div>
-
-        <div class="row">
-          <span class="col-sm-12 col-12" tal:content="structure provider:plone.abovecontentbody" />
-        </div>
-
-        <div class="row" tal:condition="view/myhtml">
-          <div class="col-sm-10 col-12" tal:content="structure view/myhtml"/>
-          <div class="col-sm-2"></div>		
-        </div>
-
-        <div class="row" tal:condition="not:results" tal:content="view/emptymessage"/>
-
-        <div class="row mb-3" tal:condition="results">
-
-          <div class="col-sm-12 col-12">
-
+          <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
+            <h1 tal:content="view/mytitle"/>
+            <span tal:content="structure provider:plone.belowcontenttitle" />
+            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
+            <div tal:content="structure view/myhtml"/>
+            <span tal:condition="not:results" tal:content="view/emptymessage"/>
             <div class="accordion" id="accordeonAnsicht">
               <div tal:repeat="item batch" class="card">
                 <div class="card-header" id="headingOne">
@@ -62,14 +44,69 @@
                 </div>
               </div>
             </div>
+          </div>
 
+          <div tal:condition="view/mastercards" class="col-sm-8 col-12">
+            <h1 tal:content="view/mytitle"/>
+            <span tal:content="structure provider:plone.belowcontenttitle" />
+            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
+            <div tal:content="structure view/myhtml"/>
+            <span tal:condition="not:results" tal:content="view/emptymessage"/>
+            <div class="accordion" id="accordeonAnsicht">
+              <div tal:repeat="item batch" class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" aria-expanded="true" 
+                            tal:attributes="data-target string:#collapse${item/index}; aria-controls string:collapse${item/index}"
+                            tal:content="item/title"></button>
+                  </h2>
+                </div>
+                <div class="collapse" aria-labelledby="headingOne" data-parent="#accordeonAnsicht" 
+                     tal:attributes="id string:collapse${item/index}">
+                  <div class="card-body" tal:content="structure item/text"> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+            <div tal:repeat="card view/mastercards">
+              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
+                <div class="card-header" tal:content="card/title">Header</div>
+                <a href="#" tal:attributes="href card/reference; title card/reftitle">
+                  <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
+                </a>
+                <div class="card-body" tal:content="structure card/text">
+                </div>
+              </div>
+              <div class="mb-3" tal:condition="python:card.get('type')=='Image'">
+                <a href="#" tal:attributes="href card/reference; title card/reftitle">
+                  <img tal:condition="card/imageurl" class="rounded img-fluid" tal:attributes="src card/imageurl"/>
+                </a>  
+              </div>
+            </div>
           </div>
 
         </div>
 
-        <div class="row" tal:condition="view/endhtml">
-          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+	<div tal:condition="not: view/mastercards" class="row">
+          <span class="col-12" tal:content="structure provider:nva.contentcards" />
         </div>
+
+        <div tal:condition="not: view/mastercards" class="row" tal:condition="view/endhtml">
+          <div class="col-12" tal:content="structure view/endhtml"/>
+        </div>
+
+        <div tal:condition="view/mastercards" class="row">
+          <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
+        </div>
+
+        <div tal:condition="view/mastercards" class="row" tal:condition="view/endhtml">
+          <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
+        </div>
+
 
         <div class="row">
           <span class="col-12" tal:content="structure provider:plone.belowcontentbody" />

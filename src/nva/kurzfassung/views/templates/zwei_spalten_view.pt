@@ -69,11 +69,11 @@
         </div>
 
         <div class="row">
-          <span class="col-12" tal:content="structure provider:nva.contentcards" />
+          <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
         <div class="row" tal:condition="view/endhtml">
-          <div class="col-sm-12 col-12" tal:content="structure view/endhtml"/>
+          <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
         </div>
 
         <div class="row">

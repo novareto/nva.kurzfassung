@@ -237,13 +237,13 @@ class ErweiterteKurzfassung(BrowserView):
             html += '<a href="%s" title="%s">weiter</a>' % (contextobj.absolute_url(), contextobj.title)
         return html    
 
-    def getContextCards(self, obj):
+    def getContextCards(self, obj, cardtype='cards'):
         """
         Formatiert die Contextinformationen
         """
         cardlist = []
-        if hasattr(obj, 'cards'):
-            for i in obj.cards:
+        if hasattr(obj, cardtype):
+            for i in getattr(obj, cardtype, []):
                 entry = {}
                 contextobj = i.to_object
                 entry['type'] = contextobj.portal_type
@@ -313,6 +313,7 @@ class ErweiterteKurzfassung(BrowserView):
                 entry['topimage'] = imgtag % (top, imgclass, img['title'], img['description'])
             entry['video'] = self.formatVideo(obj)
             entry['cards'] = self.getContextCards(obj)
+            entry['content-cards'] = self.getContextCards(obj, 'contentcards')
             if not self.excludeFromDisplay(obj):
                 contents.append(entry)
                 index +=1
