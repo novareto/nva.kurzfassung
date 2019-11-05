@@ -140,9 +140,10 @@ class ErweiterteKurzfassung(BrowserView):
         img['url'] = ''
         img['reference'] = '#'
         img['reftitle'] = ''
-        if obj.relatedItems:
-            img['reference'] = obj.relatedItems[0].to_object.absolute_url()
-            img['reftitle'] = obj.relatedItems[0].to_object.title
+        if hasattr(obj, 'relatedItems'):
+            if obj.relatedItems:
+                img['reference'] = obj.relatedItems[0].to_object.absolute_url()
+                img['reftitle'] = obj.relatedItems[0].to_object.title
         if 'newsurl' in obj.__dict__:
             if obj.newsurl:
                 img['reference'] = obj.newsurl.to_object.absolute_url()
