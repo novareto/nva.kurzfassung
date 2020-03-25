@@ -26,8 +26,8 @@
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
             <div tal:content="structure view/myhtml"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
             <div tal:repeat="item batch">
             <hr class="media-default mb-3"/>
@@ -118,8 +118,8 @@
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
             <div tal:content="structure view/myhtml"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
             <div tal:repeat="item batch">
             <hr class="media-default mb-3"/>

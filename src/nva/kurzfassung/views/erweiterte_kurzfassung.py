@@ -294,6 +294,8 @@ class ErweiterteKurzfassung(BrowserView):
                         entry['text'] = obj.text
             entry['datum'] = i.created.strftime('%d.%m.%Y')
             entry['url'] = obj.absolute_url()
+            if obj.portal_type == 'Image':
+                entry['url'] = obj.absolute_url() + '/image_view_fullscreen'
             if obj.portal_type == 'Link':
                 entry['url'] = self.formatLink(obj)
             entry['excludeFromDisplay'] = self.excludeFromDisplay(obj)
