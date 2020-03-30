@@ -26,8 +26,8 @@
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
             <div tal:content="structure view/myhtml"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
             <span tal:condition="not:allcards" tal:content="view/emptymessage"/>
             <div tal:repeat="cards batch" class="card-deck mb-3">
               <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 18rem;">
@@ -62,8 +62,8 @@
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
             <div tal:content="structure view/myhtml"/>
+            <span tal:content="structure provider:plone.abovecontentbody" />
             <span tal:condition="not:allcards" tal:content="view/emptymessage"/>
             <div tal:repeat="cards batch" class="card-deck mb-3">
               <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 21rem;">

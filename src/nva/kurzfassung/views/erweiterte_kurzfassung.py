@@ -155,10 +155,10 @@ class ErweiterteKurzfassung(BrowserView):
         if hasattr(obj, 'alttitle'):
             if obj.alttitle:
                 img['title'] = obj.alttitle
-        if hasattr(obj, 'image'):
-            if obj.image:
-                img['url'] = '%s/@@images/image' %obj.absolute_url()
-                return img
+        #if hasattr(obj, 'image'):
+        #    if obj.image:
+        #        img['url'] = '%s/@@images/image' %obj.absolute_url()
+        #        return img
         if hasattr(obj, 'bild'):
             if obj.bild:
                 img['url'] = '%s/@@images/bild' %obj.absolute_url()
@@ -196,6 +196,10 @@ class ErweiterteKurzfassung(BrowserView):
                     img['title'] = obj.titleimages[0].to_object.title
                     img['description'] = obj.titleimages[0].to_object.description
                     return img
+        if hasattr(obj, 'image'):
+            if obj.image:
+                img['url'] = '%s/@@images/image' %obj.absolute_url()
+                return img
         if not img['url'] and obj.portal_type == "News Item":
             img = getDefault()
             return img
