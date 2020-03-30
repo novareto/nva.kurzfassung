@@ -140,7 +140,7 @@ class ErweiterteKurzfassung(BrowserView):
         img['url'] = ''
         img['reference'] = '#'
         img['reftitle'] = ''
-        if hasattr(obj, 'relatedItems'):
+        if 'relatedItems' in obj.__dict__:
             if obj.relatedItems:
                 img['reference'] = obj.relatedItems[0].to_object.absolute_url()
                 img['reftitle'] = obj.relatedItems[0].to_object.title
@@ -152,51 +152,51 @@ class ErweiterteKurzfassung(BrowserView):
             if obj.extnews:
                 img['reference'] = obj.extnews
                 img['reftitle'] = obj.extnewstitle
-        if hasattr(obj, 'alttitle'):
+        if 'alttitle' in obj.__dict__:
             if obj.alttitle:
                 img['title'] = obj.alttitle
         #if hasattr(obj, 'image'):
         #    if obj.image:
         #        img['url'] = '%s/@@images/image' %obj.absolute_url()
         #        return img
-        if hasattr(obj, 'bild'):
+        if 'bild' in obj.__dict__:
             if obj.bild:
                 img['url'] = '%s/@@images/bild' %obj.absolute_url()
                 return img
-        if hasattr(obj, 'portraet'):
+        if 'portraet' in obj.__dict__:
             if obj.portraet:
                 img['url'] = '%s/@@images/portraet' %obj.absolute_url()
                 return img
-        if hasattr(obj, 'schmuckbild'):
+        if 'schmuckbild' in obj.__dict__:
             if obj.schmuckbild:
                 schmuck = self.getSchmuckbild(obj)
                 if schmuck:
                     img['url'] = image[0]
                     img['description'] = image[1]
                     return img
-        if hasattr(obj, 'poster'):
+        if 'poster' in obj.__dict__:
             if obj.poster:
                 img['url'] = '%s/@@images/poster' %obj.absolute_url()
                 return img
-        if hasattr(obj, 'newsimage'):
+        if 'newsimage' in obj.__dict__:
             if obj.newsimage:
                 if obj.newsimage.to_object:
                     img['url'] = '%s/@@images/image' % obj.newsimage.to_object.absolute_url()
                     img['title'] = obj.newsimage.to_object.title
                     img['description'] = obj.newsimage.to_object.description
                     return img
-        if hasattr(obj, 'titleimage'):
+        if 'titleimage' in obj.__dict__:
             if obj.titleimage:
                 img['url'] = '%s/@@images/titleimage' % obj.absolute_url()
                 return img
-        if hasattr(obj, 'titleimages'):
+        if 'titleimages' in obj.__dict__:
             if obj.titleimages:
                 if obj.titleimages[0].to_object:
                     img['url'] = '%s/@@images/image' % obj.titleimages[0].to_object.absolute_url()
                     img['title'] = obj.titleimages[0].to_object.title
                     img['description'] = obj.titleimages[0].to_object.description
                     return img
-        if hasattr(obj, 'image'):
+        if 'image' in obj.__dict__:
             if obj.image:
                 img['url'] = '%s/@@images/image' %obj.absolute_url()
                 return img
