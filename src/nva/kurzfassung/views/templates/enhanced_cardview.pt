@@ -86,7 +86,7 @@
           <span class="col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
-        <div tal:condition="not: view/mastercards" class="row" tal:condition="view/endhtml">
+        <div tal:condition="python: not view.mastercards and view.endhtml" class="row">
           <div class="col-12" tal:content="structure view/endhtml"/>
         </div>
 
@@ -94,7 +94,7 @@
           <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
-        <div tal:condition="view/mastercards" class="row" tal:condition="view/endhtml">
+        <div tal:condition="python: view.mastercards and view.endhtml" class="row">
           <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
         </div>
 
