@@ -9,7 +9,8 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
-      <div tal:define="allcards view/cardlist;
+      <div class="container"
+           tal:define="allcards view/cardlist;
            batchvalue view/batchvalue;
            Batch python:modules['plone.batching'].Batch;
            b_size python:batchvalue;b_start python:0;b_start request/b_start | b_start;
@@ -20,9 +21,11 @@
           <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
 
+        <!-- Start Folder Contents -->
         <div class="row">
-
-          <div tal:condition="view/mastercards" class="col-sm-8 col-12">
+          <!--Two Columns if portlets called mastercards are there-->
+          <!-- Left Column -->
+          <div tal:condition="view/mastercards" class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
@@ -33,6 +36,10 @@
               <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 18rem;">
                   <a href="" class="card-link" tal:attributes="href item/url">
                     <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
+                    <div tal:condition="python: not item.get('topimage') and item.get('video')" 
+                         tal:attributes="class python:item['video']['videoformat']">
+                      <span tal:replace="structure item/video/embed"/>
+                    </div>
                     <div class="card-body">
 	              <h5 class=""><strong tal:content="item/title"/></h5>
                       <p class="card-text">
@@ -43,8 +50,10 @@
               </div>
             </div>
           </div>
+          <!-- End Left Column -->
 
-	  <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+          <!-- Right Column -->
+	  <div tal:condition="view/mastercards" class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
               <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>
@@ -57,7 +66,9 @@
               </div>
             </div>
           </div>
+          <!-- End Right Column -->
 
+          <!-- One Column if no portlets called mastercards are there -->
           <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
@@ -69,6 +80,10 @@
               <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 21rem;">
                   <a href="" class="card-link" tal:attributes="href item/url">
                     <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
+                    <div tal:condition="python: not item.get('topimage') and item.get('video')" 
+                         tal:attributes="class python:item['video']['videoformat']">
+                      <span tal:replace="structure item/video/embed"/>
+                    </div>
                     <div class="card-body">
                       <h5 class=""><strong tal:content="item/title"/></h5>
                       <p class="card-text">
@@ -79,8 +94,9 @@
               </div>
             </div>
           </div>
-
+          <!-- End One Column -->
         </div>
+        <!-- End Folder Contents -->
 
         <div tal:condition="not: view/mastercards" class="row">
           <span class="col-12" tal:content="structure provider:nva.contentcards" />
@@ -91,11 +107,11 @@
         </div>
 
         <div tal:condition="view/mastercards" class="row">
-          <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
+          <span class="col-sm-9 col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
         <div tal:condition="python: view.mastercards and view.endhtml" class="row">
-          <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
+          <div class="col-sm-9 col-12" tal:content="structure view/endhtml"/>
         </div>
 
 
