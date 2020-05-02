@@ -23,7 +23,7 @@
 
         <div class="row">
 
-          <div class="col-sm-8 col-12">
+          <div class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
@@ -49,9 +49,9 @@
 
           </div>
 
-	  <div class="col-sm-4 col-12">
+	  <div class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
-              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
+              <div tal:condition="python:card.get('type')!='Image'" class="card card-shadow mb-3">
                 <div class="card-header" tal:content="card/title">Header</div>
 		<a href="#" tal:attributes="href card/reference; title card/reftitle">
 		  <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
