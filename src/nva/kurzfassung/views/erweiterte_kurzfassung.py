@@ -281,7 +281,12 @@ class ErweiterteKurzfassung(BrowserView):
         for i in self.query():
             entry = {}
             obj = i.getObject()
+            entry['dachzeile'] = ''
+            if 'dachzeile' in obj.__dict__:
+                if obj.dachzeile:
+                    entry['dachzeile'] = obj.dachzeile
             entry['title'] = obj.title
+            entry['type'] = obj.portal_type
             entry['index'] = index
             entry['description'] = obj.description
             if obj.portal_type == 'LDAPPerson':
@@ -318,9 +323,26 @@ class ErweiterteKurzfassung(BrowserView):
                 top = img['url']
                 imgclass = 'img-fluid img-top'
                 entry['topimage'] = imgtag % (top, imgclass, img['title'], img['description'])
+                entry['img-listing'] = img['url'] + '/listing'
+                entry['img-icon'] = img['url'] + '/icon'
+                entry['img-thumb'] = img['url'] + '/thumb'
+                entry['img-mini'] = img['url'] + '/mini'
+                entry['img-preview'] = img['url'] + '/preview'
+                entry['img-large'] = img['url'] + '/large'
             entry['video'] = self.formatVideo(obj)
             entry['cards'] = self.getContextCards(obj)
             entry['content-cards'] = self.getContextCards(obj, 'contentcards')
+            if obj.portal_type == 'Event':
+                entry['start'] = obj.start
+                entry['end'] = obj.end
+                fullevent = ''
+                if obj.start and obj.end:
+                    fullevent = '%s-%s' % (obj.start.strftime('%d.%m.%Y'), obj.end.strftime('%d.%m.%Y'))
+                elif obj.start and not obj.end:
+                    fullevent = '%s' % obj.start.strftme('%d.%m.%Y')
+                if obj.location:
+                    fullevent += ', %s' % obj.location
+                entry['fullevent'] = fullevent    
             if not self.excludeFromDisplay(obj):
                 contents.append(entry)
                 index +=1
