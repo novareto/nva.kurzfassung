@@ -20,145 +20,118 @@
           <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
 
-        <div class="row"> <!-- row -->
-
-          <div tal:condition="not:view/mastercards" class="col-12 col-sm-12 mb-3">
+        <!-- Content -->
+        <div class="row">
+          <!-- Portlets / Cards nicht vorhanden -->
+          <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
             <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <div tal:content="structure view/myhtml"/>
+	    <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
+            <p tal:condition="view/mydesc" class="lead mt-5">
+	      <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
+	      <span tal:content="view/mydesc"/>
+	    </p>
             <span tal:content="structure provider:plone.abovecontentbody" />
+            <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div tal:repeat="item batch">
-            <hr class="media-default mb-3"/>
-            <a href="#" tal:attributes="href item/url">
-            
-              <div class="row">
-                <div class="col-sm-12 col-12">
-                  <h3 class="newsDescription" tal:content="item/title">
-                    Title
-                  </h3>
-                </div>
-              </div>
-
-              <div class="row">
-                <div tal:condition="item/image" class="col-sm-5 col-7">
-                  <img src="" alt="" class="media-object img-fluid" tal:replace="structure item/image"/>
-                </div>
-
-                <div tal:condition="item/image" class="col-sm-7 col-12">
-                  <p class="tileBody">
-                    <span class="description" tal:content="item/description">
-                      description
-                    </span>
-                  </p>
-                </div>
-
-                <div tal:condition="not:item/image" class="col-sm-12 col-12">
-                  <p class="tileBody">
-                    <span class="description" tal:content="item/description">
-                      description
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </a>
-	    </div>
-          </div>
-
-	  <!--
-          <div tal:condition="python: not item.mastercards and item.video" tal:define="video item/video" class="col-12 col-sm-12 mb-3">
-            <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
-            <div tal:content="structure view/myhtml"/>
-            <span tal:condition="not:results" tal:content="view/emptymessage"/>
-
-            <div tal:repeat="item batch">
-
-            <hr class="media-default mb-3">
-
-            <div class="row">
-              <div class="col-sm-12 col-12">
-                <h3 class="newsDescription" tal:content="item/title">
-                  Title
-                </h3>
-              </div>
-            </div>
-
-            <div class="row">
-              <div tal:condition="video/embed" class="col-sm-5 col-12">
-                <div class="" tal:attributes="class video/videoformat">
-                  <span tal:replace="structure video/embed"/>
-                </div>
-              </div>
-              <div tal:condition="video/src" class="col-sm-5 col-12">
-                <div class="video-wrapper">
-                  <video width="640" height="360" style="width: 100%; height: 100%;" controls>
-                    <source type="video/youtube" tal:attributes="src video/src;type video/videotype"/>
-                  </video>
-                </div>
-              </div>
+            <!-- Start Iteration Folder Items -->
+            <div class="mt-5" tal:repeat="item batch">  
+              <hr class="media-default"/>
+              <!-- Vorschaubild vorhanden -->
               <a href="#" tal:attributes="href item/url">
-                <div class="col-sm-7 col-12">
-                  <p class="tileBody">
-                    <span class="description" tal:content="item/description"/>
-                  </p>
+	        <div tal:condition="python: item.get('img-mini')" class="row">
+		  <div class="col-6 col-sm-3">
+                    <img class="img-fluid" tal:attributes="src python: item.get('img-mini')">
+		  </div>
+		  <div class="col-6 col-sm-9">
+                    <h3 tal:content="item/title">
+                      Title
+                    </h3>
+                    <p>
+                      <span tal:replace="item/description">
+                        description
+                      </span>
+		    </p>
+		  </div>
+	        </div> 
+              </a>
+              <!-- Ende Vorschaubild vorhanden -->
+              <!-- Vorschaubild nicht vorhanden -->
+              <a href="#" tal:attributes="href item/url">
+                <div tal:condition="python: not item.get('img-mini')" class="row">
+                  <div class="col-12">
+                    <h3 tal:content="item/title">
+                      Title
+                    </h3>
+                    <p>
+                      <span tal:replace="item/description">
+                        description
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </a>
+              <!-- Ende Vorschaubild nicht vorhanden -->
             </div>
+            <!-- Ende Iteration Folder Items -->
+	  </div>
+          <!-- Ende Portlets / Card nicht vorhanden -->
 
-            </div>
-          </div>
-	  -->
-
-
-          <div tal:condition="view/mastercards" class="col-12 col-sm-8 mb-3">
+          <!-- Portlets/Cards vorhanden / Content-Spalte -->
+          <div tal:condition="view/mastercards" class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <div tal:content="structure view/myhtml"/>
+	    <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
+            <p tal:condition="view/mydesc" class="lead mt-5">
+              <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
+              <span tal:content="view/mydesc"/>
+            </p>
             <span tal:content="structure provider:plone.abovecontentbody" />
+            <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div tal:repeat="item batch">
-            <hr class="media-default mb-3"/>
-            <a href="#" tal:attributes="href item/url">
-            
-              <div class="row">
-                <div class="col-sm-12 col-12">
-                  <h3 class="newsDescription" tal:content="item/title">
-                    Title
-                  </h3>
+            <!-- Start Iteration Folder Items -->
+            <div class="mt-5" tal:repeat="item batch">  
+              <hr class="media-default"/>
+              <!-- Vorschaubild vorhanden -->
+	      <a href="#" tal:attributes="href item/url">
+                <div tal:condition="python: item.get('img-mini')" class="row">
+                  <div class="col-6 col-sm-3">
+                    <img class="img-fluid" tal:attributes="src python: item.get('img-mini')">
+                  </div>
+                  <div class="col-6 col-sm-9">
+                    <h3 tal:content="item/title">
+                      Title
+                    </h3>
+                    <p>
+                      <span tal:replace="item/description">
+                        description
+                      </span>
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              <div class="row">
-                <div tal:condition="item/image" class="col-sm-5 col-7">
-                  <img src="" alt="" class="media-object img-fluid" tal:replace="structure item/image"/>
+	      </a>
+              <!-- Ende Vorschaubild vorhanden -->
+              <!-- Vorschaubild nicht vorhanden -->
+              <a href="#" tal:attributes="href item/url">
+                <div tal:condition="python: not item.get('img-mini')" class="row">
+                  <div class="col-12">
+                    <h3 tal:content="item/title">
+                      Title
+                    </h3>
+                    <p>
+                      <span tal:replace="item/description">
+                        description
+                      </span>
+                    </p>
+                  </div>
                 </div>
-
-                <div tal:condition="item/image" class="col-sm-7 col-12">
-                  <p class="tileBody">
-                    <span class="description" tal:content="item/description">
-                      description
-                    </span>
-                  </p>
-                </div>
-
-                <div tal:condition="not:item/image" class="col-sm-12 col-12">
-                  <p class="tileBody">
-                    <span class="description" tal:content="item/description">
-                      description
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </a>
-	    </div>
+              </a>
+              <!-- Ende Vorschaubild nicht vorhanden -->
+            </div>
+            <!-- Ende Iteration Folder Items -->
           </div>
+          <!-- Ende Portlets/Cards vorhanden / Content-Spalte -->
 
-          <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+          <!-- Portlets/Cards vorhanden / Portlet-Spalte -->
+          <div tal:condition="view/mastercards" class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
               <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>
@@ -175,76 +148,11 @@
               </div>
             </div>
           </div>
+          <!-- Ende Portlets/Cards vorhanden / Portlet-Spalte -->
+        </div>
+        <!-- Ende Content -->
 
-
-          <!--
-          <div tal:condition="python: item.mastercards and item.video" tal:define="video item/video" class="col-12 col-sm-8 mb-3">
-            <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
-            <div tal:content="structure view/myhtml"/>
-            <span tal:condition="not:results" tal:content="view/emptymessage"/>
-
-            <div tal:repeat="item batch">
-
-            <hr class="media-default mb-3">
-
-            <div class="row">
-              <div class="col-sm-12 col-12">
-                <h3 class="newsDescription" tal:content="item/title">
-                  Title
-                </h3>
-              </div>
-            </div>
-
-            <div class="row">
-              <div tal:condition="video/embed" class="col-sm-5 col-12">
-                <div class="" tal:attributes="class video/videoformat">
-                  <span tal:replace="structure video/embed"/>
-                </div>
-              </div>
-              <div tal:condition="video/src" class="col-sm-5 col-12">
-                <div class="video-wrapper">
-                  <video width="640" height="360" style="width: 100%; height: 100%;" controls>
-                    <source type="video/youtube" tal:attributes="src video/src;type video/videotype"/>
-                  </video>
-                </div>
-              </div>
-              <a href="#" tal:attributes="href item/url">
-                <div class="col-sm-7 col-12">
-                  <p class="tileBody">
-                    <span class="description" tal:content="item/description"/>
-                  </p>
-                </div>
-              </a>
-            </div>
-
-            </div> 
-          </div>
-
-          <div tal:condition="python: item.mastercards and item.video" class="col-sm-4 col-12">
-            <div tal:repeat="card view/mastercards">
-              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
-                <div class="card-header" tal:content="card/title">Header</div>
-                <a href="#" tal:attributes="href card/reference; title card/reftitle">
-                  <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
-                </a>
-                <div class="card-body" tal:content="structure card/text">
-                </div>
-              </div>
-              <div class="mb-3" tal:condition="python:card.get('type')=='Image'">
-                <a href="#" tal:attributes="href card/reference; title card/reftitle">
-                  <img tal:condition="card/imageurl" class="rounded img-fluid" tal:attributes="src card/imageurl"/>
-                </a>  
-              </div>
-            </div>
-          </div>
-	  -->
-
-
-        </div> <!-- row -->
-
+	<!-- Elemente nach Content -->
         <div tal:condition="not: view/mastercards" class="row">
           <span class="col-12" tal:content="structure provider:nva.contentcards" />
         </div>
@@ -261,10 +169,10 @@
           <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
         </div>
 
-
         <div class="row">
           <span class="col-12" tal:content="structure provider:plone.belowcontentbody" />
         </div>
+	<!-- Ende Elemente nach Content -->
 
         <tal:batchnavigation
              define="batchnavigation nocall:context/@@batchnavigation"

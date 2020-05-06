@@ -55,7 +55,7 @@
           <!-- Right Column -->
 	  <div tal:condition="view/mastercards" class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
-              <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
+              <div tal:condition="python:card.get('type')!='Image'" class="" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>
                 <img class="card-img-top" tal:condition="card/imageurl" tal:attributes="src card/imageurl;alt card/imagedesc;title card/imagetitle">
                 <div class="card-body" tal:content="structure card/text">

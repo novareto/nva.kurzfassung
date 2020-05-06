@@ -20,15 +20,17 @@
         </div>
 
         <div class="row mb-3">
-
           <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
             <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
+            <p tal:condition="view/mydesc" class="lead mt-5">
+              <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
+              <span tal:content="view/mydesc"/>
+            </p>
             <span tal:content="structure provider:plone.abovecontentbody" />
-            <div tal:content="structure view/myhtml"/>
+            <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div class="accordion" id="accordeonAnsicht">
+            <div class="mt-5 accordion" id="accordeonAnsicht">
               <div tal:repeat="item batch" class="card">
                 <div class="card-header" id="headingOne">
                   <h2 class="mb-0">
@@ -46,14 +48,17 @@
             </div>
           </div>
 
-          <div tal:condition="view/mastercards" class="col-sm-8 col-12">
+          <div tal:condition="view/mastercards" class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
+            <p tal:condition="view/mydesc" class="lead mt-5">
+              <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
+              <span tal:content="view/mydesc"/>
+            </p>
             <span tal:content="structure provider:plone.abovecontentbody" />
-            <div tal:content="structure view/myhtml"/>
+            <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div class="accordion" id="accordeonAnsicht">
+            <div class="mt-5" class="accordion" id="accordeonAnsicht">
               <div tal:repeat="item batch" class="card">
                 <div class="card-header" id="headingOne">
                   <h2 class="mb-0">
@@ -71,7 +76,7 @@
             </div>
           </div>
 
-          <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+          <div tal:condition="view/mastercards" class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
               <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>

@@ -24,49 +24,45 @@
 
           <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
             <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+            <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
+            <p tal:condition="view/mydesc" class="lead mt-5">
+              <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
+              <span tal:content="view/mydesc"/>
+            </p>
             <span tal:content="structure provider:plone.abovecontentbody" />
-            <div tal:content="structure view/myhtml"/>
+            <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div tal:repeat="item batch">		  
+            <div class="mt-5" tal:repeat="item batch">		  
               <hr class="media-default"/>
               <a href="#" tal:attributes="href item/url">
-                <h3 class="newsDescription" tal:content="item/title">
+                <h3 class="pb-5 newsDescription" tal:content="item/title">
                     Title
                 </h3>
-                <p class="tileBody">
-                    <span class="description" tal:content="item/description">
-                        description
-                    </span>
-                </p>
               </a>
 	    </div>  
           </div>
 
-          <div tal:condition="view/mastercards" class="col-sm-8 col-12">
+          <div tal:condition="view/mastercards" class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
+	    <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
+            <p tal:condition="view/mydesc" class="lead mt-5">
+              <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
+              <span tal:content="view/mydesc"/>
+            </p>
             <span tal:content="structure provider:plone.abovecontentbody" />
-            <div tal:content="structure view/myhtml"/>
+            <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div tal:repeat="item batch">                 
+            <div class="mt-5" tal:repeat="item batch">                 
               <hr class="media-default"/>
               <a href="#" tal:attributes="href item/url">
-                <h3 class="newsDescription" tal:content="item/title">
+                <h3 class="pb-5 newsDescription" tal:content="item/title">
                     Title
                 </h3>
-                <p class="tileBody">
-                    <span class="description" tal:content="item/description">
-                        description
-                    </span>
-                </p>
               </a>
             </div>  
           </div>
 
-          <div tal:condition="view/mastercards" class="col-sm-4 col-12">
+          <div tal:condition="view/mastercards" class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
               <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
                 <div class="card-header" tal:content="card/title">Header</div>
