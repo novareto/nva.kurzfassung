@@ -32,7 +32,7 @@ def formatphone(number):
 
 
 class ErweiterteKurzfassung(BrowserView):
-    """Erweiterte Kurzfassung"""
+    """Viewklasse Erweiterte Kurzfassung"""
 
 
     def query(self, obj=None):
@@ -217,6 +217,9 @@ class ErweiterteKurzfassung(BrowserView):
         return video
 
     def formatCollection(self, contextobj):
+        """
+        Formatiert eine Karte für den Karten-/Portlettyp Kollektion
+        """
         weiter = False
         objlist = self.query(contextobj)
         if len(objlist) > 5:
@@ -244,7 +247,7 @@ class ErweiterteKurzfassung(BrowserView):
 
     def getContextCards(self, obj, cardtype='cards'):
         """
-        Formatiert die Contextinformationen
+        Formatiert referenzierte Inhalte als Karten - wird für Portlets oder Context-Cards angewendet.
         """
         cardlist = []
         if hasattr(obj, cardtype):
@@ -274,7 +277,7 @@ class ErweiterteKurzfassung(BrowserView):
 
     def formatcontent(self):
         """
-        Formatiert die Ordnerinhalte
+        Formatiert die einzelnen Einträge des Ordners in Dictionaries
         """
         contents = []
         index = 0
@@ -350,6 +353,9 @@ class ErweiterteKurzfassung(BrowserView):
 
 
     def getBatchValue(self):
+        """
+        Gibt den eingestellten Stapelwert zurück.
+        """
         default = 10000
         if hasattr(self.context, 'batchvalue'):
             if self.context.batchvalue == 0:
@@ -360,6 +366,9 @@ class ErweiterteKurzfassung(BrowserView):
 
 
     def contentlist(self):
+        """
+        Konfiguriert Variablen für das Viewtemplate und gibt die Ordnerinhalte zurück.
+        """
         self.mytitle = self.context.Title()
         self.mydesc = self.context.Description()
         self.myhtml = ''
