@@ -34,7 +34,7 @@
             <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
             <!-- Start Iteration Folder Items -->
-            <div class="mt-5" tal:repeat="item batch">  
+            <div class="list-item" tal:repeat="item batch">  
               <hr class="media-default"/>
               <!-- Vorschaubild vorhanden -->
               <a href="#" tal:attributes="href item/url">
@@ -88,7 +88,7 @@
             <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
             <!-- Start Iteration Folder Items -->
-            <div class="mt-5" tal:repeat="item batch">  
+            <div class="list-item" tal:repeat="item batch">  
               <hr class="media-default"/>
               <!-- Vorschaubild vorhanden -->
 	      <a href="#" tal:attributes="href item/url">

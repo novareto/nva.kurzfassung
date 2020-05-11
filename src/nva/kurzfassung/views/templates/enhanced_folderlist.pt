@@ -32,10 +32,10 @@
             <span tal:content="structure provider:plone.abovecontentbody" />
             <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div class="mt-5" tal:repeat="item batch">		  
+            <div class="list-item" tal:repeat="item batch">		  
               <hr class="media-default"/>
               <a href="#" tal:attributes="href item/url">
-                <h3 class="pb-5 newsDescription" tal:content="item/title">
+                <h3 class="newsDescription" tal:content="item/title">
                     Title
                 </h3>
               </a>
@@ -52,10 +52,10 @@
             <span tal:content="structure provider:plone.abovecontentbody" />
             <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div class="mt-5" tal:repeat="item batch">                 
+            <div class="list-item" tal:repeat="item batch">                 
               <hr class="media-default"/>
               <a href="#" tal:attributes="href item/url">
-                <h3 class="pb-5 newsDescription" tal:content="item/title">
+                <h3 class="newsDescription" tal:content="item/title">
                     Title
                 </h3>
               </a>
