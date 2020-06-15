@@ -65,6 +65,14 @@ class ErweiterteKurzfassung(BrowserView):
         videoentry['videoformat'] = "embed-responsive embed-responsive-16by9"
         return videoentry
 
+    def download_size(self, obj, suffix='Byte'):
+        num = obj.file.size
+        for unit in ['','k','M','G','T','P','E','Z']:
+            if abs(num) < 1024.0:
+                #return "%3.2f %s%s" % (num, unit, suffix)
+                return "%s %s%s" % (int(num), unit, suffix)
+            num /= 1024.0
+        return "% %s%s" % (int(num), 'Y', suffix)
 
     def leermeldung(self):
         """
@@ -74,7 +82,6 @@ class ErweiterteKurzfassung(BrowserView):
         if hasattr(self.context, 'leermeldung'):
             emptymessage = self.context.leermeldung
         return emptymessage
-
 
     def formatLink(self, link):
         """
@@ -311,6 +318,9 @@ class ErweiterteKurzfassung(BrowserView):
             if obj.portal_type == 'Link':
                 entry['url'] = self.formatLink(obj)
             entry['excludeFromDisplay'] = self.excludeFromDisplay(obj)
+            entry['download_size'] = ''
+            if obj.portal_type == 'File':
+                entry['download_size'] = self.download_size(obj)
             entry['image'] = ''
             entry['smallimg'] = ''
             entry['topimage'] = ''

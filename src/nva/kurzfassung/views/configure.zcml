@@ -97,6 +97,14 @@
      />
 
   <browser:page
+     name="enhanced_foldertext"
+     for="*"
+     class=".erweiterter_ordnertext.ErweiterterOrdnertext"
+     template="templates/enhanced_foldertext.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="enhanced_foldersummary"
      for="*"
      class=".erweiterte_kurzfassung.ErweiterteKurzfassung"
@@ -129,6 +137,22 @@
      />
 
   <browser:page
+     name="download_view"
+     for="*"
+     class=".download_ansicht.DownloadAnsicht"
+     template="templates/download_ansicht.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     name="download_image_view"
+     for="*"
+     class=".download_ansicht.DownloadImageAnsicht"
+     template="templates/download_image_ansicht.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="testvideo"
      for="*"
      class=".testvideo.TestVideo"
@@ -145,19 +169,34 @@
        description="Erweiterte Kurzfassung fuer Plone"
      />
      <browser:menuItem
-       title="Erweiterte Ordnerliste"
+       title="Ordnerliste"
        action="enhanced_folderlist"
        description="Erweiterte Ordnerliste fuer Plone"
      />
      <browser:menuItem
-       title="Kartenansicht"
+       title="Ordnertext"
+       action="enhanced_foldertext"
+       description="Erweiterte Ordnerliste fuer Plone"
+     />
+     <browser:menuItem
+       title="Karten"
        action="enhanced_cardview"
        description="Kartenansicht fuer Plone"
      />
      <browser:menuItem
-       title="Akkordeon Ansicht"
+       title="Akkordeon"
        action="akkordeon_view"
        description="Akkordeon Ansicht fuer Plone"
+     />
+     <browser:menuItem
+       title="Download ohne Bild"
+       action="download_view"
+       description="Download Ansicht ohne Bild"
+     />
+     <browser:menuItem
+       title="Download mit Bild"
+       action="download_image_view"
+       description="Download Ansicht mit Bild"
      />
      <browser:menuItem
        title="Spalten mit Karten"

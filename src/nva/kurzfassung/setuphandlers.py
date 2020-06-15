@@ -26,26 +26,16 @@ def post_install(context):
         viewlist = viewlist + ('enhanced_foldersummary',)
     if 'enhanced_folderlist' not in viewlist:
         viewlist = viewlist + ('enhanced_folderlist',)
+    if 'enhanced_foldertext' not in viewlist:
+        viewlist = viewlist + ('enhanced_foldertext',)
     if 'enhanced_cardview' not in viewlist:
         viewlist = viewlist + ('enhanced_cardview',)
-    if 'enhanced_cardcolumns' not in viewlist:
-        viewlist = viewlist + ('enhanced_cardcolumns',)
-    if 'nachricht_view' not in viewlist:
-        viewlist = viewlist + ('nachricht_view',)
-    if 'small_nachricht_view' not in viewlist:
-        viewlist = viewlist + ('small_nachricht_view',)
-    if 'nachricht_liste_view' not in viewlist:
-        viewlist = viewlist + ('nachricht_liste_view',)
-    if 'enhanced_contentdir' not in viewlist:
-        viewlist = viewlist + ('enhanced_contentdir',)
-    if 'enhanced_tableview' not in viewlist:
-        viewlist = viewlist + ('enhanced_tableview',)
-    if 'zwei_spalten_view' not in viewlist:
-        viewlist = viewlist + ('zwei_spalten_view',)
-    if 'zwei_spalten_context_view' not in viewlist:
-        viewlist = viewlist + ('zwei_spalten_context_view',)
     if 'akkordeon_view' not in viewlist:
         viewlist = viewlist + ('akkordeon_view',)        
+    if 'download_view' not in viewlist:
+        viewlist = viewlist + ('download_view',)        
+    if 'download_image_view' not in viewlist:
+        viewlist = viewlist + ('download_image_view',)        
     typefolder.manage_changeProperties(view_methods = viewlist)
 
     typecollection = typesTool['Collection']
@@ -54,20 +44,16 @@ def post_install(context):
         viewlist = viewlist + ('enhanced_foldersummary',)
     if 'enhanced_folderlist' not in viewlist:
         viewlist = viewlist + ('enhanced_folderlist',)
+    if 'enhanced_foldertext' not in viewlist:
+        viewlist = viewlist + ('enhanced_foldertext',)
     if 'enhanced_cardview' not in viewlist:
         viewlist = viewlist + ('enhanced_cardview',)
-    if 'enhanced_cardcolumns' not in viewlist:
-        viewlist = viewlist + ('enhanced_cardcolumns',)
-    if 'enhanced_contentdir' not in viewlist:
-        viewlist = viewlist + ('enhanced_contentdir',)
-    if 'enhanced_tableview' not in viewlist:
-        viewlist = viewlist + ('enhanced_tableview',)
-    if 'zwei_spalten_view' not in viewlist:
-        viewlist = viewlist + ('zwei_spalten_view',)
-    if 'zwei_spalten_context_view' not in viewlist:
-        viewlist = viewlist + ('zwei_spalten_context_view',)
     if 'akkordeon_view' not in viewlist:
-        viewlist = viewlist + ('akkordeon_view',)        
+        viewlist = viewlist + ('akkordeon_view',)
+    if 'download_view' not in viewlist:
+        viewlist = viewlist + ('download_view',) 
+    if 'download_image_view' not in viewlist:
+        viewlist = viewlist + ('download_image_view',)
     typecollection.manage_changeProperties(view_methods = viewlist)
 
 

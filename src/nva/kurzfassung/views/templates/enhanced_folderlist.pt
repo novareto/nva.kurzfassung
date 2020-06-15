@@ -22,27 +22,7 @@
 
         <div class="row">
 
-          <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
-            <h1 tal:content="view/mytitle"/>
-            <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
-            <p tal:condition="view/mydesc" class="lead mt-5">
-              <img class="icon" src="++theme++plonetheme.siguv/icons/siguv/dot.svg">
-              <span tal:content="view/mydesc"/>
-            </p>
-            <span tal:content="structure provider:plone.abovecontentbody" />
-            <div class="mt-5" tal:content="structure view/myhtml"/>
-            <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <div class="list-item" tal:repeat="item batch">		  
-              <hr class="media-default"/>
-              <a href="#" tal:attributes="href item/url">
-                <h3 class="newsDescription" tal:content="item/title">
-                    Title
-                </h3>
-              </a>
-	    </div>  
-          </div>
-
-          <div tal:condition="view/mastercards" class="col-sm-9 col-12">
+          <div class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
 	    <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
             <p tal:condition="view/mydesc" class="lead mt-5">
@@ -82,24 +62,16 @@
 
         </div>
 
-        <div tal:condition="not: view/mastercards" class="row">
-          <span class="col-12" tal:content="structure provider:nva.contentcards" />
+        <div class="row">
+          <span class="col-sm-9 col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
-        <div tal:condition="not: view/mastercards" class="row" tal:condition="view/endhtml">
-          <div class="col-12" tal:content="structure view/endhtml"/>
-        </div>
-
-        <div tal:condition="view/mastercards" class="row">
-          <span class="col-sm-8 col-12" tal:content="structure provider:nva.contentcards" />
-        </div>
-
-        <div tal:condition="view/mastercards" class="row" tal:condition="view/endhtml">
-          <div class="col-sm-8 col-12" tal:content="structure view/endhtml"/>
+        <div class="row" tal:condition="view/endhtml">
+          <div class="col-sm-9 col-12" tal:content="structure view/endhtml"/>
         </div>
 
         <div class="row">
-          <span class="col-12" tal:content="structure provider:plone.belowcontentbody" />
+          <span class="col-sm-9 col-12" tal:content="structure provider:plone.belowcontentbody" />
         </div>
 
         <tal:batchnavigation

@@ -23,9 +23,8 @@
 
         <!-- Start Folder Contents -->
         <div class="row">
-          <!--Two Columns if portlets called mastercards are there-->
           <!-- Left Column -->
-          <div tal:condition="view/mastercards" class="col-sm-9 col-12">
+          <div class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
             <span tal:content="structure provider:plone.belowcontenttitle" />
             <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
@@ -67,56 +66,19 @@
             </div>
           </div>
           <!-- End Right Column -->
-
-          <!-- One Column if no portlets called mastercards are there -->
-          <div tal:condition="not:view/mastercards" class="col-sm-12 col-12">
-            <h1 tal:content="view/mytitle"/>
-            <span tal:content="structure provider:plone.belowcontenttitle" />
-            <div id="parent-fieldname-description" class="documentDescription" tal:content="view/mydesc"/>
-            <div tal:content="structure view/myhtml"/>
-            <span tal:content="structure provider:plone.abovecontentbody" />
-            <span tal:condition="not:allcards" tal:content="view/emptymessage"/>
-            <div tal:repeat="cards batch" class="card-deck mb-3">
-              <div tal:repeat="item cards" class="card bg-light mb-3" style="max-width: 21rem;">
-                  <a href="" class="card-link" tal:attributes="href item/url">
-                    <img tal:condition="item/topimage" tal:replace="structure item/topimage"/>
-                    <div tal:condition="python: not item.get('topimage') and item.get('video')" 
-                         tal:attributes="class python:item['video']['videoformat']">
-                      <span tal:replace="structure item/video/embed"/>
-                    </div>
-                    <div class="card-body">
-                      <h5 class=""><strong tal:content="item/title"/></h5>
-                      <p class="card-text">
-                        <span class="description" tal:content="item/description"/>
-                      </p>
-                    </div>
-                  </a>
-              </div>
-            </div>
-          </div>
-          <!-- End One Column -->
         </div>
         <!-- End Folder Contents -->
 
-        <div tal:condition="not: view/mastercards" class="row">
-          <span class="col-12" tal:content="structure provider:nva.contentcards" />
-        </div>
-
-        <div tal:condition="python: not view.mastercards and view.endhtml" class="row">
-          <div class="col-12" tal:content="structure view/endhtml"/>
-        </div>
-
-        <div tal:condition="view/mastercards" class="row">
+        <div class="row">
           <span class="col-sm-9 col-12" tal:content="structure provider:nva.contentcards" />
         </div>
 
-        <div tal:condition="python: view.mastercards and view.endhtml" class="row">
+        <div tal:condition="view/endhtml" class="row">
           <div class="col-sm-9 col-12" tal:content="structure view/endhtml"/>
         </div>
 
-
         <div class="row">
-          <span class="col-12" tal:content="structure provider:plone.belowcontentbody" />
+          <span class="col-sm-9 col-12" tal:content="structure provider:plone.belowcontentbody" />
         </div>
 
         <tal:batchnavigation

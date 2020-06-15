@@ -20,10 +20,8 @@
           <span class="col-sm12 col-12" tal:content="structure provider:plone.abovecontenttitle" />
         </div>
 
-        <!-- Content -->
         <div class="row">
 
-          <!-- Content-Spalte -->
           <div class="col-sm-9 col-12">
             <h1 tal:content="view/mytitle"/>
 	    <!--<span tal:content="structure provider:plone.belowcontenttitle" />-->
@@ -34,50 +32,21 @@
             <span tal:content="structure provider:plone.abovecontentbody" />
             <div class="mt-5" tal:content="structure view/myhtml"/>
             <span tal:condition="not:results" tal:content="view/emptymessage"/>
-            <!-- Start Iteration Folder Items -->
-            <div class="list-item" tal:repeat="item batch">  
+            <div class="list-item" tal:repeat="item batch">                 
               <hr class="media-default"/>
-              <!-- Vorschaubild vorhanden -->
-	      <a href="#" tal:attributes="href item/url">
-                <div tal:condition="python: item.get('img-mini')" class="row">
-                  <div class="col-6 col-sm-3">
-                    <img class="img-fluid" tal:attributes="src python: item.get('img-mini')">
-                  </div>
-                  <div class="col-6 col-sm-9">
-                    <h3 tal:content="item/title">
-                      Title
-                    </h3>
-                    <p>
-                      <span tal:replace="item/description">
-                        description
-                      </span>
-                    </p>
-                  </div>
-                </div>
-	      </a>
-              <!-- Ende Vorschaubild vorhanden -->
-              <!-- Vorschaubild nicht vorhanden -->
               <a href="#" tal:attributes="href item/url">
-                <div tal:condition="python: not item.get('img-mini')" class="row">
-                  <div class="col-12">
-                    <h3 tal:content="item/title">
-                      Title
-                    </h3>
-                    <p>
-                      <span tal:replace="item/description">
-                        description
-                      </span>
-                    </p>
-                  </div>
-                </div>
+                <h3 class="newsDescription" tal:content="item/title">
+                    Title
+                </h3>
+                <p>
+                  <span tal:replace="item/description">
+                      description
+                  </span>
+                </p>
               </a>
-              <!-- Ende Vorschaubild nicht vorhanden -->
-            </div>
-            <!-- Ende Iteration Folder Items -->
+            </div>  
           </div>
-          <!-- Ende Content-Spalte -->
 
-          <!-- Portlets/Cards vorhanden / Portlet-Spalte -->
           <div tal:condition="view/mastercards" class="col-sm-3 col-12">
             <div tal:repeat="card view/mastercards">
               <div tal:condition="python:card.get('type')!='Image'" class="card border-primary mb-3" tal:attributes="class card/cardclass">
@@ -95,11 +64,9 @@
               </div>
             </div>
           </div>
-          <!-- Ende Portlets/Cards vorhanden / Portlet-Spalte -->
-        </div>
-        <!-- Ende Content -->
 
-	<!-- Elemente nach Content -->
+        </div>
+
         <div class="row">
           <span class="col-sm-9 col-12" tal:content="structure provider:nva.contentcards" />
         </div>
@@ -111,7 +78,6 @@
         <div class="row">
           <span class="col-sm-9 col-12" tal:content="structure provider:plone.belowcontentbody" />
         </div>
-	<!-- Ende Elemente nach Content -->
 
         <tal:batchnavigation
              define="batchnavigation nocall:context/@@batchnavigation"
