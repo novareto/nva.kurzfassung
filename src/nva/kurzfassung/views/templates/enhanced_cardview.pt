@@ -40,8 +40,8 @@
                       <span tal:replace="structure item/video/embed"/>
                     </div>
                     <div class="card-body">
-	              <h5 class=""><strong tal:content="item/title"/></h5>
-                      <p class="card-text">
+	              <h3 class=""><strong tal:content="item/title"/></h3>
+                      <p class="card-text small">
                         <span class="description" tal:content="item/description"/>
                       </p>
                     </div>
