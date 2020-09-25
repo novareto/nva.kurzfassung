@@ -269,6 +269,9 @@ class ErweiterteKurzfassung(BrowserView):
                         entry['text'] = contextobj.text.output
                 elif contextobj.portal_type in ['Collection']:
                     entry['text'] = self.formatCollection(contextobj)
+                else:
+                    portlet_view = api.content.get_view(name='portlet-view', context=contextobj, request=self.request)
+                    entry['text'] = portlet_view()
                 entry['cardclass'] = 'card card-shadow mb-3'    
                 if hasattr(contextobj, 'cardcolor'):
                     entry['cardclass'] = contextobj.cardcolor
